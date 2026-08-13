@@ -1,0 +1,23 @@
+function filtrarPares(numeros){
+    return numeros.filter(numeros => numeros % 2 ==0);
+}
+let numeros = [1,2,3,4,5,6,7,8,9,10];
+let pares = filtrarPares(numeros);
+
+console.log('aqui esta o resultado do codigo que foi feito com Arrow.')
+console.log(numeros);
+console.log(pares);
+
+console.log('aqui esta o resultado com o codigo que e feito sem o Arrow')
+console.log(numeros);
+
+function par(numero){
+    return numero % 2 == 0;
+}
+
+function filtrarParesSemArrow(numeros){
+    return numeros.filter(par);
+}
+//let parSemArrow= filtrarParesSemArrow(numeros)
+
+console.log(filtrarPares(numeros))

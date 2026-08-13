@@ -1,0 +1,8 @@
+/*map: Crie um array com o quadrado dos números de um array original.
+Exemplo: [2, 3, 4] → [4, 9, 16]*/
+
+let numeros = [2,3,4,5,6,7]
+function quadradoLista(parametro){
+    return parametro.map(numero => numero*numero)
+}
+console.log(quadradoLista(numeros))

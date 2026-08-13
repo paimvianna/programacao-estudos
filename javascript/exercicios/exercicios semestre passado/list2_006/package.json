@@ -1,0 +1,12 @@
+{
+  "name": "list2_006",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "list2_00map_converte_as_strings_do_array_maiúsculas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
