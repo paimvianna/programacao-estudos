@@ -1,0 +1,9 @@
+l=0
+i=0
+while(i<=l)
+    a=i
+    while(a<=l)
+        print(a, end="")
+    a+=1
+print()
+i+=1

@@ -1,0 +1,5 @@
+[Banco]
+Banco12345678912356|12345678912356|1
+[Pessoas]
+Pessoa|ana|viv|22|12345678917
+[Contas]

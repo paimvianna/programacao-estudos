@@ -1,0 +1,24 @@
+•Porto Alegre,Pelotas
+•Porto Alegre,Lajeado,114.5km
+•Porto Alegre,Gramado,120.3km
+•Pelotas,Rio Grande,58.2km
+•Pelotas,Bagé,185.1km
+•Caxias do Sul,Gramado,59.8km
+•Caxias do Sul,Bento Gonçalves,43.1km
+•Santa Maria,Cruz Alta,127.0km
+•Rio Grande,Chuy,270.0km
+•Lajeado,Santa Cruz do Sul,60.1km
+•Gramado,Canela,7.0km
+•Bagé,Sant'Ana do Livramento,175.0km
+•Bento Gonçalves,Garibaldi,10.0km
+•Cruz Alta,Ijuí,35.0km
+•Santa Cruz do Sul,Venâncio Aires,35.0km
+•Venâncio Aires,Lajeado,35.0km
+•Porto Alegre,Florianópolis,477.5km
+•Florianópolis,Curitiba,300.0km
+•Curitiba,São Paulo,400.0km
+•São Paulo,Rio de Janeiro,429.0km
+•Rio de Janeiro,Belo Horizonte,434.0km
+•Belo Horizonte,Brasília,735.0km
+•Gravatai,Porto Alegre,30.3km
+Po

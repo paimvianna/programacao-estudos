@@ -1,0 +1,67 @@
+aula 28/10/25
+o useref
+export default function Formulario(){
+    const [contatos,stContatos] = useState();
+    const [maxID, setMaxId] = useState(1);
+    function excluir(id){
+        let novoContatos = contatos.filter(contato=>contato.id!=id);
+        setContatos(novoContatos);    
+    }
+    function enviar (formData){
+        console.log(formData);
+        const nome= formData.get("nome);
+        const email = formData.get("email");
+        const notificar= formData.get("notificar")
+        //alert(nome+" - "+email+"notificar: "+notificar);
+        let novoContato = {
+                            id:maxId,
+                            nome:nome,
+                            notificar:notificar,
+                           };
+        
+        let novoContatos =[...contatos,novoContato];//faz o clone de forma plana 
+        setContatos(novoContatos);
+        setMaxId(maxId+1)   
+        setMaxid(masId+1);
+        //alert("Enviou");
+    }
+    return <>
+    <form action={enviar}>
+<label>Nome:
+    <input name = "nome" required />
+    </label>
+    <br/>
+    <br/>
+    <label>E-mail:<input type="email" name = "email" /></label>
+    <br/>
+    <br/>
+    <button type="submint">Enviar</buton>
+    <br/>
+    <br/>
+    <label><input type="radio"name="notificar"value="sim"/>sim</label>
+    <label><input type="radio"name="notificar"value="não"/>sim</label>
+    <buton type="submit">Enviar</button>
+</form>
+
+<table border={1}>
+    <thead>
+        <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>E-mail</th>        
+        <th>Notificar</th>
+        <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {contatos.map(contato => <tr>
+            <td>{contato.id}</td>
+            <td>{contato.nome}</td>
+            <td>{contato.e-mail}</td>
+            <td>{contato.notificar}</td>
+            <td><button onClick={()=>excluir(contato.id)}>Excluir</button></td>
+        </tr>)}
+    </tbody>
+</table>
+</>
+}

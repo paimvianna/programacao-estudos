@@ -1,0 +1,41 @@
+--1.Consultar quantas tuplas (linhas/registros) estão cadastradas na tabela e_cidade.
+select count(*) from E_Cidade;
+
+--2.Consultar quantos funcionários são do sexo masculino.
+select count(*) from E_Funcionario where sexo = 'M';--metodo que retorno somente o sexo Masculino representados pelo'M', para o Feminino e substituir pelo 'F'.
+
+select sexo, count(*) from E_Funcionario group by sexo;-- aqui retorna os dois sexos em uma unica pesquisa. Reunindo em dois grupos.
+
+--3.Consultar a quantidade de funcionários em cada setor.
+select P.descricao, count (distinct FP.codigo_funcionario)--tanto 'FP' quanto 'P' são atalhos de referencias a tabelas. 'P' para E_Projetos e 'FP' e para E_FuncionarioParticipaProjeto.
+    from E_Projeto P --criação do atalho do 'P' para E_Projeto
+        left outer join
+        E_FuncionarioParticipaProjeto FP -- Criaçã do atalho do 'FP' para E_FuncionarioParticipaProjeto
+        using (codigo_projeto)
+    group by P.descricao;
+
+--4.Consultar o total de pagamentos recebidos por cada funcionário.
+select F.nome,count(codigo_funcionario) as matricula_funcionario, sum (P.salario_bruto) as total_salario_bruto, sum (P.gratificacoes) as total_gratificacoes, sum (P.descontos) as total_descontos, sum (P.salario_liquido) as total_salario_liquido 
+    from E_Funcionario F 
+        left outer join 
+        E_Pagamento P 
+        using (codigo_funcionario) 
+    group by F.nome;
+
+--5.Consultar quantos funcionários moram em cada cidade.
+select C.nome, count (codigo_funcionario)
+    from E_cidade C
+        left inner join E_Endereco
+        using (codigo_cidade)
+    group by C.nome;
+
+--6.Consultar quantas cidades tem cada Unidade Federativa. 
+select E.nome_uf, count(nome) as nome_cidade
+    from E_UF E
+        left outer join E_Cidade
+        using (sigla_uf)
+    group by E.nome_uf;
+
+insert into E_Cidade Values(3,'Canoas','RS');
+insert into E_Cidade Values(4, 'Gravatai','RS');
+insert into E_Cidade Values(5,'Tubarão','SC');

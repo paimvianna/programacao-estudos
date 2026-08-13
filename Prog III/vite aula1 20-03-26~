@@ -1,0 +1,13 @@
+para criar um projeto vite, pegar a ultima versão do vite atraves do npm create vite@latest
+
+scr e o source onde fica ocodigo fonte
+
+npm run dev e para desenvolvimento
+
+npm run build faz um arquivo de produção onde se cria a pasta dist
+onde ficara a distribuição da build onde a gente coloca no servidor.
+no App vamos por a raiz do sistema.
+o index.css e onde fica os estilhos e modelagens.
+não precisa fazer o recarregamento da pagina por causa HMS e a troca de modo quente, e o jsx é javascript xml.
+todos os componentes que nos criamos tem que ser em letra maiuscula no seu inicio
+as tag nativas em minusculo

@@ -1,0 +1,19 @@
+#entrada
+med = input('informe o nome da medicação: ')
+vlmed = float(input('informe o valor da medicação: '))
+nmed = med
+menor = vlmed
+soma = 0
+i = 0
+#processamento
+while i < 4:
+    med = input('informe o nome da medicação: ')
+    vlmed = float(input('informe o valor da medicação: '))
+    if menor > vlmed:
+        menor = vlmed
+        nmed =med
+    soma += vlmed
+    i += 1
+#saida
+print (f'{menor}, {nmed}, media dos valores dos medicamentos {soma/5}.')
+

@@ -1,0 +1,973 @@
+from abc import ABC, abstractmethod
+import os # Importar para verificar existência do arquivo
+
+class Pessoa:
+    def __init__(self, nome, sobrenome, idade, cpf):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.idade = idade
+        self.__cpf = cpf 
+        self.__contasbancarias = []
+
+    @classmethod
+    def receber_do_teclado(cls):
+        print(f'\n---- Cadastro de Nova Pessoa ----\n')
+        nome = str(input('Informe o nome: '))
+        sobrenome = str(input('Informe o sobrenome: '))
+
+        while True:
+            try:
+                idade = int(input('Digite a idade: '))
+                if idade <= 0:
+                    print(f'A idade deve ser um valor positivo.')
+                    continue
+                break
+            except ValueError:
+                print('Entrada invalida para a idade. Digite um numero inteiro.')
+
+        cpf_para_armazenar = ""
+        while True:
+            cpf_input = input('Informe o CPF (apenas números): ')
+            cpf_limpo = str(cpf_input).replace('.', '').replace('-', '')
+            if Pessoa.validar_cpf(cpf_limpo):
+                cpf_para_armazenar = cpf_limpo
+                break
+            else:
+                pass 
+        return cls(nome, sobrenome, idade, cpf_para_armazenar)
+
+    @classmethod
+    def from_string(cls, data_str: str):
+        """Constrói um objeto Pessoa a partir de uma string formatada."""
+        parts = data_str.strip().split('|')
+        if len(parts) != 5 or parts[0] != 'Pessoa':
+            raise ValueError(f"Formato de string inválido para Pessoa: {data_str}")
+        
+        # Pessoa|nome|sobrenome|idade|cpf_raw
+        nome = parts[1]
+        sobrenome = parts[2]
+        idade = int(parts[3])
+        cpf_raw = parts[4]
+        
+        pessoa = cls(nome, sobrenome, idade, cpf_raw)
+        # As contas serão adicionadas separadamente após todas as pessoas e bancos serem carregados
+        return pessoa
+
+    def to_string(self):
+        """Converte o objeto Pessoa em uma string para serialização."""
+        return f"Pessoa|{self.nome}|{self.sobrenome}|{self.idade}|{self.__cpf}"
+
+    @staticmethod
+    def validar_cpf(cpf_str):
+        cpf_str = str(cpf_str).replace('.', '').replace('-', '')
+
+        if len(cpf_str) != 11 or not cpf_str.isdigit():
+            print(f'Erro: CPF deve ter 11 dígitos numéricos.')
+            return False
+
+        cpf_inteiro = [int(d) for d in cpf_str]
+
+        if len(set(cpf_inteiro)) == 1:
+            print(f'Erro: CPF não pode ter todos os dígitos iguais.')
+            return False
+
+        soma_a = 0
+        for i in range(9):
+            soma_a += cpf_inteiro[i] * (10 - i)
+        resto_a = soma_a % 11
+        digito_esperado_a = 11 - resto_a
+        if resto_a < 2:
+            digito_esperado_a = 0
+
+        if digito_esperado_a != cpf_inteiro[9]:
+            print(f'Erro: Primeiro dígito verificador ({cpf_inteiro[9]}) incorreto. Esperado: {digito_esperado_a}')
+            return False
+
+        soma_b = 0
+        for i in range(10):
+            soma_b += cpf_inteiro[i] * (11 - i)
+        resto_b = soma_b % 11
+        digito_esperado_b = 11 - resto_b
+        if resto_b < 2:
+            digito_esperado_b = 0
+
+        if digito_esperado_b != cpf_inteiro[10]:
+            print(f'Erro: Segundo dígito verificador ({cpf_inteiro[10]}) incorreto. Esperado: {digito_esperado_b}')
+            return False
+
+        return True
+
+    @property
+    def cpf(self):
+        if len(self.__cpf) == 11 and self.__cpf.isdigit():
+            return f'{self.__cpf[:3]}.{self.__cpf[3:6]}.{self.__cpf[6:9]}-{self.__cpf[9:]}'
+        return "CPF Inválido/Não Formatável"
+
+    @cpf.setter
+    def cpf(self, novo_cpf):
+        if not Pessoa.validar_cpf(novo_cpf):
+            raise ValueError(f'Tentativa de atribuir um CPF inválido.')
+        self.__cpf = str(novo_cpf).replace('.', '').replace('-', '')
+
+    @property
+    def contas_bancarias(self):
+        return self.__contasbancarias
+
+    def buscar_conta(self, numero_conta_buscar):
+        for conta_objeto in self.contas_bancarias:
+            if conta_objeto.numero_conta == numero_conta_buscar:
+                return conta_objeto
+        return None
+
+    def adicionar_conta(self, conta):
+        self.__contasbancarias.append(conta)
+
+    def info(self):
+       print(f'Nome: {self.nome} {self.sobrenome}')
+       print(f'Idade: {self.idade}')
+       print(f'CPF: {self.cpf}')
+       print(f'Contas bancárias: {len(self.contas_bancarias)}')
+       self.info_contas() 
+
+    def info_contas(self):
+        print(f'Contas de {self.nome} {self.sobrenome}:')
+        if not self.contas_bancarias:
+            print(f'Não existe contas para este cliente.')
+        else:
+            for conta in self.contas_bancarias:
+                conta.info() 
+
+class Banco:
+    def __init__(self, nome, cnpj, numero_banco):
+        self.__nome = nome
+        self.__cnpj = cnpj 
+        self.__numero_banco = numero_banco
+        self.__contasbancaria_banco = []
+
+    @classmethod
+    def receber_do_teclado(cls):
+        print(f'\n---- Cadastro de Novo Banco ----\n')
+        nome = str(input('Informe o nome do Banco: '))
+        
+        cnpj_para_armazenar = ""
+        while True:
+            cnpj_input = input('Informe o CNPJ (apenas números): ')
+            cnpj_limpo = str(cnpj_input).replace('.', '').replace('/', '').replace('-', '')
+            
+            if Banco.validar_cnpj(cnpj_limpo):
+                cnpj_para_armazenar = cnpj_limpo
+                break
+            else:
+                pass 
+
+        while True:
+            try:
+                numero_banco = int(input('Informe o numero do Banco: '))
+                if numero_banco <= 0:
+                    print(f'O numero do banco deve ser um valor positivo.')
+                    continue
+                break
+            except ValueError:
+                print('Entrada invalida para o numero do banco. Digite um numero inteiro.')
+
+        return cls(nome, cnpj_para_armazenar, numero_banco)
+
+    @classmethod
+    def from_string(cls, data_str: str):
+        """Constrói um objeto Banco a partir de uma string formatada."""
+        parts = data_str.strip().split('|')
+        if len(parts) != 4 or parts[0] != 'Banco':
+            raise ValueError(f"Formato de string inválido para Banco: {data_str}")
+        
+        # Banco|nome|cnpj_raw|numero_banco
+        nome = parts[1]
+        cnpj_raw = parts[2]
+        numero_banco = int(parts[3])
+        
+        banco = cls(nome, cnpj_raw, numero_banco)
+        # As contas serão adicionadas separadamente
+        return banco
+
+    def to_string(self):
+        """Converte o objeto Banco em uma string para serialização."""
+        return f"Banco|{self.__nome}|{self.__cnpj}|{self.__numero_banco}"
+
+    @staticmethod
+    def validar_cnpj(cnpj_str):
+        cnpj_str = str(cnpj_str).replace('.', '').replace('/', '').replace('-', '')
+
+        if len(cnpj_str) != 14 or not cnpj_str.isdigit():
+            print(f'Erro: O CNPJ deve conter 14 dígitos numéricos.')
+            return False
+
+        cnpj_inteiros = [int(d) for d in cnpj_str]
+
+        if len(set(cnpj_inteiros)) == 1:
+            print(f'Erro: O CNPJ não pode ter todos os dígitos iguais é inválido.')
+            return False
+
+        lista_numeros_validadores_a = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+        soma_a = 0
+        for i in range(12):
+            soma_a += cnpj_inteiros[i] * lista_numeros_validadores_a[i]
+        resto_a = soma_a % 11
+        digito_esperado_a = 11 - resto_a
+        if resto_a < 2:
+            digito_esperado_a = 0
+
+        if digito_esperado_a != cnpj_inteiros[12]:
+            print(f'Erro: Primeiro dígito verificador ({cnpj_inteiros[12]}) incorreto. Esperado: {digito_esperado_a}.')
+            return False
+
+        lista_numeros_validadores_b = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+        soma_b = 0
+        for i in range(13):
+            soma_b += cnpj_inteiros[i] * lista_numeros_validadores_b[i]
+        resto_b = soma_b % 11
+        digito_esperado_b = 11 - resto_b
+        if resto_b < 2:
+            digito_esperado_b = 0
+        
+        if digito_esperado_b != cnpj_inteiros[13]:
+            print(f'Erro: Segundo dígito verificador ({cnpj_inteiros[13]}) incorreto. Esperado: {digito_esperado_b}.')
+            return False
+
+        return True
+
+    @property
+    def nome(self):
+        return self.__nome
+
+    @nome.setter
+    def nome(self, novo_nome):
+        if not isinstance(novo_nome, str) or len(novo_nome.strip()) == 0:
+            raise ValueError('O nome do Banco não pode ser vazio.')
+        self.__nome = novo_nome.strip()
+
+    @property
+    def cnpj(self):
+        if len(self.__cnpj) == 14 and self.__cnpj.isdigit():
+            return f'{self.__cnpj[:2]}.{self.__cnpj[2:5]}.{self.__cnpj[5:8]}/{self.__cnpj[8:12]}-{self.__cnpj[12:14]}'
+        return "CNPJ Inválido/Não Formatável"
+
+    @cnpj.setter
+    def cnpj(self, cnpj_str):
+        if not Banco.validar_cnpj(cnpj_str):
+            raise ValueError(f'Tentativa de atribuir um CNPJ inválido.')
+        self.__cnpj = str(cnpj_str).replace('.', '').replace('/', '').replace('-', '')
+
+    @property
+    def numero_banco(self):
+        return self.__numero_banco
+
+    @numero_banco.setter
+    def numero_banco(self, numero_banco_valido):
+        if not isinstance(numero_banco_valido, int) or numero_banco_valido <= 0:
+            raise ValueError(f'O numero do banco deve ser um inteiro positivo.')
+        self.__numero_banco = numero_banco_valido
+
+    @property
+    def contas_bancarias_banco(self):
+        return self.__contasbancaria_banco
+
+    def adicionar_conta(self, conta):
+        self.__contasbancaria_banco.append(conta)
+
+    def info_banco(self):
+        print(f'----Informações do Banco:-----')
+        print(f'Nome do banco: {self.nome}')
+        print(f'CNPJ: {self.cnpj}')
+        print(f'Número do Banco: {self.numero_banco}')
+        print(f'Total de Contas: {len(self.contas_bancarias_banco)}')
+        if self.contas_bancarias_banco:
+            print(f'Detalhes das contas do banco {self.nome}:')
+            for conta in self.contas_bancarias_banco:
+                conta.info() 
+        else:
+            print(f'Não há contas cadastradas neste banco.')
+
+    def criar_conta(self, titular:'Pessoa', tipo_conta: str):
+        print(f'\n ----Criando Conta no Banco {self.nome} para {titular.nome}')
+
+        numero_conta = None
+        while True:
+            try:
+                numero_conta = int(input(f'Informe o numero da conta: '))
+                if numero_conta <= 0:
+                    print(f'O numero da conta deve ser um numero positivo.')
+                    continue
+                break
+            except ValueError:
+                print(f'Entrada invalida para numero de conta. Digite um numero válido.')
+
+        saldo_inicial = None
+        while True:
+            try:
+                saldo_inicial = float(input(f'Informe o saldo inicial da conta: R$ '))
+                if saldo_inicial < 0:
+                    print(f'O saldo inicial não pode ser negativo.')
+                    continue
+                break
+            except ValueError:
+                print(f'Entrada inválida para o saldo inicial. Digite um número.')
+
+        senha = None
+        while True:
+            senha = input(f'Crie uma senha para a conta (mínimo 4 caracteres): ')
+            if len(senha) < 4:
+                print(f'A senha deve ter no mínimo 4 dígitos.')
+                continue
+            break
+
+        nova_conta = None
+        if tipo_conta.lower() == 'cc':
+            taxas_mensais = None
+            while True:
+                try:
+                    taxas_mensais_input = input(f'Informe as taxas mensais da conta corrente (padrão 15.00): R$ ')
+                    taxas_mensais = float(taxas_mensais_input) if taxas_mensais_input else 15.00
+                    
+                    if taxas_mensais < 0:
+                        print(f'As taxas mensais não podem ser negativas.')
+                        continue
+                    break
+                except ValueError:
+                    print(f'Entrada inválida para taxas mensais. Digite um número.')
+            nova_conta = ContaCorrente(titular, self, numero_conta, saldo_inicial, senha, taxas_mensais)
+
+        elif tipo_conta.lower() == 'cp':
+            rendimento_mensal = None
+            while True:
+                try:
+                    rendimento_mensal_input = input('Informe o rendimento mensal (ex: 0.005 para 0.5%) (padrão 0.005): ')
+                    rendimento_mensal = float(rendimento_mensal_input) if rendimento_mensal_input else 0.005
+                    
+                    if rendimento_mensal < 0:
+                        print('O rendimento mensal não pode ser negativo.')
+                        continue
+                    break
+                except ValueError:
+                    print('Entrada inválida para o rendimento mensal. Digite um número.')
+            nova_conta = ContaPoupanca(titular, self, numero_conta, saldo_inicial, senha, rendimento_mensal)
+
+        else:
+            print("Tipo de conta inválido. Use 'cc' ou 'cp'.")
+            return None
+
+        if nova_conta:
+            self.adicionar_conta(nova_conta)
+            titular.adicionar_conta(nova_conta)
+            print(f'Conta {nova_conta.numero_conta} ({tipo_conta.upper()}) criada com sucesso no banco {self.nome} para {titular.nome}!')
+        return nova_conta
+
+class Conta_Bancaria(ABC):
+    def __init__(self, titular:'Pessoa',banco:'Banco',numero_conta:int, saldo:float, senha:str):
+        if not isinstance(titular,Pessoa):
+            raise TypeError (f'O titular deve ser uma instância da classe Pessoa.')
+        if not isinstance(banco, Banco):
+            raise TypeError(f'O banco deve ser uma instancia da classe Banco.')
+        if not isinstance(numero_conta, int) or numero_conta <= 0:
+            raise ValueError (f'Numero da conta deve ser um inteiro positivo.') 
+        if not isinstance(saldo, (int,float)) or saldo < 0: 
+            raise ValueError (f'O saldo inicial não pode ser negativo e deve ser numérico.') 
+        if not isinstance(senha,str) or len(senha) < 4:
+            raise ValueError (f'A senha deve ser uma string e ter no mínimo 4 caracteres.') 
+
+        self._titular = titular
+        self._banco = banco
+        self._numero_conta = numero_conta 
+        self._saldo = saldo
+        self._senha = senha
+
+    @property
+    def titular(self):
+        return self._titular
+
+    @property
+    def banco(self):
+        return self._banco
+
+    @property
+    def numero_conta(self):
+        return self._numero_conta
+
+    @numero_conta.setter
+    def numero_conta(self,novo_numero):
+        if not isinstance(novo_numero,int) or novo_numero <= 0:
+            raise ValueError(f'O numero da conta deve ser um inteiro postivo.')
+        self._numero_conta = novo_numero
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @saldo.setter
+    def saldo(self,novo_saldo):
+        if novo_saldo < 0:
+            raise ValueError(f'Saldo nao pode ser negativo.')
+        self._saldo = novo_saldo
+
+    @property
+    def senha(self):
+        return self._senha
+
+    @senha.setter
+    def senha(self, nova_senha):
+        if not isinstance(nova_senha, str) or len(nova_senha) < 4:
+            raise ValueError(f'A senha deve ser uma string e ter no minimo 4 caracteres.')
+        self._senha = nova_senha
+
+    @abstractmethod
+    def deposito(self, valor: float):
+        pass
+
+    @abstractmethod
+    def saque(self, valor: float):
+        pass
+
+    @abstractmethod
+    def verifica_senha(self,senha_digitada: str) -> bool:
+        pass
+
+    @abstractmethod
+    def info(self):
+        pass
+
+class ContaCorrente(Conta_Bancaria):
+    def __init__(self, titular: 'Pessoa', banco: 'Banco', numero_conta, saldo_inicial, senha: str ,taxas_mensais = 15.00):
+        super().__init__(titular,banco,numero_conta,saldo_inicial,senha)
+        if not isinstance(taxas_mensais, (int,float)) or taxas_mensais < 0:
+            raise ValueError(f'As taxas mensais devem ser um valor positivo.')
+        self._taxas_mensais = taxas_mensais
+
+    @classmethod
+    def from_string(cls, data_str: str, pessoas_map, bancos_map):
+        """Constrói um objeto ContaCorrente a partir de uma string formatada, resolvendo as referências."""
+        parts = data_str.strip().split('|')
+        if len(parts) != 7 or parts[0] != 'ContaCorrente':
+            raise ValueError(f"Formato de string inválido para ContaCorrente: {data_str}")
+        
+        # ContaCorrente|numero_conta|saldo|senha|taxas_mensais|titular_cpf_raw|banco_numero
+        numero_conta = int(parts[1])
+        saldo = float(parts[2])
+        senha = parts[3]
+        taxas_mensais = float(parts[4])
+        titular_cpf_raw = parts[5]
+        banco_numero = int(parts[6])
+
+        titular = pessoas_map.get(titular_cpf_raw)
+        banco = bancos_map.get(banco_numero)
+        
+        if not titular or not banco:
+            raise ValueError(f"Titular (CPF: {titular_cpf_raw}) ou Banco (Número: {banco_numero}) não encontrado durante a desserialização da Conta Corrente.")
+        
+        conta = cls(titular, banco, numero_conta, saldo, senha, taxas_mensais)
+        return conta
+
+    def to_string(self):
+        """Converte o objeto ContaCorrente em uma string para serialização."""
+        return (f"ContaCorrente|{self.numero_conta}|{self.saldo}|{self.senha}|"
+                f"{self.taxas_mensais}|{self.titular._Pessoa__cpf}|{self.banco.numero_banco}")
+
+    @property
+    def taxas_mensais(self):
+        return self._taxas_mensais
+    @taxas_mensais.setter
+    def taxas_mensais(self, nova_taxa:float):
+        if not isinstance(nova_taxa,(int,float)) or nova_taxa < 0:
+            raise ValueError(f'As taxas mensais devem ser um valor positivo.')
+        self._taxas_mensais = nova_taxa
+
+    def deposito(self,valor):
+        if not isinstance(valor,(int,float)) or valor <= 0:
+            print(f'Valor de depósito inválido. Informe um valor positivo.')
+            return
+        self.saldo += valor
+        print(f'O valor depositado foi de R$ {valor:.2f}, com sucesso.') 
+        print(f'Novo saldo: R$ {self.saldo:.2f}') 
+
+    def saque(self,valor):
+        if not isinstance(valor,(int,float)) or valor <= 0:
+            print(f'O valor a ser sacado tem que ser positivo.')
+            return
+
+        if self.saldo >= valor:
+            self.saldo -= valor
+            print(f'O saque de R${valor:.2f} foi autorizado.') 
+            print(f'Seu saldo após operação é de R$ {self.saldo:.2f}.') 
+        else:
+            print(f'Saque não autorizado: Saldo R${self.saldo:.2f} insuficiente para sacar R${valor:.2f}')
+
+    def verifica_senha(self,senha_digitada: str) -> bool:
+        return senha_digitada == self._senha
+
+    def info(self):
+        print(f"\n--- Informações da Conta Corrente ---")
+        print(f"Banco: {self.banco.nome}")
+        print(f"Número da Conta: {self.numero_conta}")
+        print(f"Titular: {self.titular.nome} {self.titular.sobrenome} (CPF: {self.titular.cpf})")
+        print(f"Saldo: R$ {self.saldo:.2f}")
+        print(f"Taxas Mensais: R$ {self.taxas_mensais:.2f}")
+        print(f"------------------------------------")
+
+    def novo_mes(self):
+        if self.saldo >= self.taxas_mensais:
+            self.saldo -= self.taxas_mensais
+            print(f'Taxa mensal de R${self.taxas_mensais:.2f} cobrada da conta {self.numero_conta}.') 
+        else:
+            print(f'Aviso: Saldo insuficiente para cobrar a taxa mensal de R${self.taxas_mensais:.2f} da conta {self.numero_conta}.')
+            print(f'Saldo atual: R$ {self.saldo:.2f}')
+        print(f'Novo saldo após o mês: R$ {self.saldo:.2f}')
+
+class ContaPoupanca(Conta_Bancaria):
+    SAQUES_MAX_POR_MES = 3
+
+    def __init__(self, titular: 'Pessoa', banco: 'Banco', numero_conta: int, saldo_inicial: float, senha: str,
+                 rendimento_mensal: float = 0.005):
+        super().__init__(titular, banco, numero_conta, saldo_inicial, senha)
+        if not isinstance(rendimento_mensal, (int, float)) or rendimento_mensal < 0:
+            raise ValueError("O rendimento mensal deve ser um valor numérico positivo ou zero.")
+        self._rendimento_mensal = rendimento_mensal
+        self._saques_restantes_mes = self.SAQUES_MAX_POR_MES
+
+    @classmethod
+    def from_string(cls, data_str: str, pessoas_map, bancos_map):
+        """Constrói um objeto ContaPoupanca a partir de uma string formatada, resolvendo as referências."""
+        parts = data_str.strip().split('|')
+        if len(parts) != 8 or parts[0] != 'ContaPoupanca':
+            raise ValueError(f"Formato de string inválido para ContaPoupanca: {data_str}")
+        
+        # ContaPoupanca|numero_conta|saldo|senha|rendimento_mensal|saques_restantes_mes|titular_cpf_raw|banco_numero
+        numero_conta = int(parts[1])
+        saldo = float(parts[2])
+        senha = parts[3]
+        rendimento_mensal = float(parts[4])
+        saques_restantes_mes = int(parts[5]) # Carrega o estado atual
+        titular_cpf_raw = parts[6]
+        banco_numero = int(parts[7])
+
+        titular = pessoas_map.get(titular_cpf_raw)
+        banco = bancos_map.get(banco_numero)
+        
+        if not titular or not banco:
+            raise ValueError(f"Titular (CPF: {titular_cpf_raw}) ou Banco (Número: {banco_numero}) não encontrado durante a desserialização da Conta Poupança.")
+        
+        conta = cls(titular, banco, numero_conta, saldo, senha, rendimento_mensal)
+        conta._saques_restantes_mes = saques_restantes_mes # Atribui o valor carregado
+        return conta
+
+    def to_string(self):
+        """Converte o objeto ContaPoupanca em uma string para serialização."""
+        return (f"ContaPoupanca|{self.numero_conta}|{self.saldo}|{self.senha}|"
+                f"{self.rendimento_mensal}|{self.saques_restantes_mes}|"
+                f"{self.titular._Pessoa__cpf}|{self.banco.numero_banco}")
+
+    @property
+    def rendimento_mensal(self) -> float:
+        return self._rendimento_mensal
+
+    @rendimento_mensal.setter
+    def rendimento_mensal(self, novo_rendimento: float):
+        if not isinstance(novo_rendimento, (int, float)) or novo_rendimento < 0:
+            raise ValueError("O rendimento mensal deve ser um valor numérico positivo ou zero.")
+        self._rendimento_mensal = novo_rendimento
+
+    @property
+    def saques_restantes_mes(self) -> int:
+        return self._saques_restantes_mes
+
+    def deposito(self, valor: float):
+        if not isinstance(valor, (int, float)) or valor <= 0:
+            print("Valor de depósito inválido. Informe um valor positivo.")
+            return
+
+        self.saldo += valor
+        print(f"Depósito de R$ {valor:.2f} realizado com sucesso.")
+        print(f"Novo saldo: R$ {self.saldo:.2f}")
+
+    def saque(self, valor: float):
+        if not isinstance(valor, (int, float)) or valor <= 0:
+            print("Valor de saque inválido. Informe um valor positivo.")
+            return
+
+        if self.saques_restantes_mes <= 0:
+            print(
+                f"Saque não autorizado: Limite de {self.SAQUES_MAX_POR_MES} saques para o mês atingido na conta {self.numero_conta}.")
+            return
+
+        if self.saldo >= valor:
+            self.saldo -= valor
+            self._saques_restantes_mes -= 1
+            print(f"Saque de R$ {valor:.2f} autorizado.")
+            print(f"Saques restantes no mês: {self.saques_restantes_mes}")
+            print(f"Novo saldo: R$ {self.saldo:.2f}")
+        else:
+            print(f"Saque não autorizado: Saldo R$ {self.saldo:.2f} insuficiente para R$ {valor:.2f}.")
+
+    def verifica_senha(self, senha_digitada: str) -> bool:
+        return senha_digitada == self._senha
+
+    def info(self):
+        print(f"\n--- Informações da Conta Poupança ---")
+        print(f"Banco: {self.banco.nome}")
+        print(f"Número da Conta: {self.numero_conta}")
+        print(f"Titular: {self.titular.nome} {self.titular.sobrenome} (CPF: {self.titular.cpf})")
+        print(f"Saldo: R$ {self.saldo:.2f}")
+        print(f"Rendimento Mensal: {self.rendimento_mensal * 100:.2f}%")
+        print(f"Saques Restantes no Mês: {self.saques_restantes_mes}")
+        print(f"------------------------------------")
+
+    def novo_mes(self):
+        rendimento_aplicado = self.saldo * self.rendimento_mensal
+        self.saldo += rendimento_aplicado
+        self._saques_restantes_mes = self.SAQUES_MAX_POR_MES
+        print(f"Mês virado para a conta poupança {self.numero_conta}.")
+        print(f"Rendimento de R$ {rendimento_aplicado:.2f} aplicado.")
+        print(f"Saques resetados para {self.SAQUES_MAX_POR_MES}.")
+        print(f"Novo saldo após o mês: R$ {self.saldo:.2f}")
+
+
+# --- Funções de Persistência de Dados (SEM JSON) ---
+
+DATA_FILE = "dados_bancarios.txt"
+
+def save_data(pessoas: list, bancos: list, filename: str = DATA_FILE):
+    """Salva os dados de pessoas, bancos e contas em um arquivo de texto customizado."""
+    lines_to_write = []
+
+    # Seções para organizar o arquivo e facilitar a leitura
+    lines_to_write.append("[Bancos]")
+    for banco in bancos:
+        lines_to_write.append(banco.to_string())
+
+    lines_to_write.append("[Pessoas]")
+    for pessoa in pessoas:
+        lines_to_write.append(pessoa.to_string())
+
+    lines_to_write.append("[Contas]")
+    for pessoa in pessoas:
+        for conta in pessoa.contas_bancarias:
+            lines_to_write.append(conta.to_string())
+    
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            for line in lines_to_write:
+                f.write(line + '\n')
+    except IOError as e:
+        print(f"Erro ao salvar dados no arquivo {filename}: {e}")
+
+def load_data(filename: str = DATA_FILE) -> dict:
+    """Carrega os dados de pessoas, bancos e contas de um arquivo de texto customizado."""
+    pessoas = []
+    bancos = []
+    pessoas_map = {} # {cpf_raw: objeto_pessoa} em forma de dicionario
+    bancos_map = {} # {numero_banco: objeto_banco} em forma de dicionario
+
+    if not os.path.exists(filename):
+        print(f"Arquivo de dados '{filename}' não encontrado.")
+        return {'pessoas': [], 'bancos': []}
+
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+
+        current_section = None
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+
+            if line == "[Bancos]":
+                current_section = "bancos"
+                continue
+            elif line == "[Pessoas]":
+                current_section = "pessoas"
+                continue
+            elif line == "[Contas]":
+                current_section = "contas"
+                continue
+            
+            if current_section == "bancos":
+                try:
+                    banco_obj = Banco.from_string(line)
+                    bancos.append(banco_obj)
+                    bancos_map[banco_obj.numero_banco] = banco_obj
+                except ValueError as e:
+                    print(f"Erro ao carregar banco: {e} na linha '{line}'")
+            elif current_section == "pessoas":
+                try:
+                    pessoa_obj = Pessoa.from_string(line)
+                    pessoas.append(pessoa_obj)
+                    pessoas_map[pessoa_obj._Pessoa__cpf] = pessoa_obj
+                except ValueError as e:
+                    print(f"Erro ao carregar pessoa: {e} na linha '{line}'")
+            elif current_section == "contas":
+                try:
+                    # Determinar o tipo da conta
+                    if line.startswith("ContaCorrente|"):
+                        conta_obj = ContaCorrente.from_string(line, pessoas_map, bancos_map)
+                    elif line.startswith("ContaPoupanca|"):
+                        conta_obj = ContaPoupanca.from_string(line, pessoas_map, bancos_map)
+                    else:
+                        print(f"Tipo de conta desconhecido na linha: {line}")
+                        continue
+                    
+                    if conta_obj:
+                        # Adicionar a conta à lista de contas da pessoa
+                        conta_obj.titular.adicionar_conta(conta_obj)
+                        # Adicionar a conta à lista de contas do banco
+                        conta_obj.banco.adicionar_conta(conta_obj)
+                except ValueError as e:
+                    print(f"Erro ao carregar conta: {e} na linha '{line}'")
+            
+    except IOError as e:
+        print(f"Erro de leitura do arquivo {filename}: {e}")
+        return {'pessoas': [], 'bancos': []}
+    except Exception as e:
+        print(f"Erro inesperado ao carregar dados: {e}")
+        print("Iniciando com dados vazios.")
+        return {'pessoas': [], 'bancos': []}
+
+    return {'pessoas': pessoas, 'bancos': bancos}
+
+
+# --- Restante do código do sistema bancário (funções e main) ---
+
+def menu():
+    """Exibe o menu de opções para o usuário."""
+    print("\n--- Sistema Bancário ---")
+    print("1. Cadastrar Nova Pessoa")
+    print("2. Cadastrar Novo Banco")
+    print("3. Criar Nova Conta")
+    print("4. Realizar Operação em Conta Existente")
+    print("5. Exibir Informações (Pessoa/Banco/Conta)")
+    print("6. Simular Passagem de Mês (Aplicar taxas/rendimentos)")
+    print("7. Sair")
+    print("------------------------")
+
+def encontrar_pessoa_por_cpf(cpf_str: str, lista_pessoas: list) -> Pessoa:
+    """Busca uma pessoa na lista pelo CPF (formatado ou não)."""
+    cpf_limpo = cpf_str.replace('.', '').replace('-', '')
+    for pessoa in lista_pessoas:
+        if pessoa._Pessoa__cpf == cpf_limpo: # Acessa o atributo privado direto para comparação
+            return pessoa
+    return None
+
+def encontrar_banco_por_numero(numero: int, lista_bancos: list) -> Banco:
+    """Busca um banco na lista pelo número do banco."""
+    for banco in lista_bancos:
+        if banco.numero_banco == numero:
+            return banco
+    return None
+
+def encontrar_conta_por_numero(numero_conta: int, pessoa: Pessoa) -> Conta_Bancaria:
+    return pessoa.buscar_conta(numero_conta)
+
+def main():
+    """Função principal que executa o sistema bancário."""
+    pessoas = []
+    bancos = []
+
+    # Carregar dados ao iniciar o programa
+    print("Tentando carregar dados existentes...")
+    loaded_data = load_data()
+    pessoas = loaded_data['pessoas']
+    bancos = loaded_data['bancos']
+    if pessoas or bancos:
+        print("Dados carregados com sucesso!")
+    else:
+        print("Iniciando com dados vazios (ou arquivo não encontrado/corrompido).")
+
+    while True:
+        menu()
+        try:
+            opcao = int(input("Escolha uma opção: "))
+        except ValueError:
+            print("Opção inválida. Digite um número.")
+            continue
+
+        if opcao == 1: # Cadastrar Nova Pessoa
+            nova_pessoa = Pessoa.receber_do_teclado()
+            pessoas.append(nova_pessoa)
+            print(f"Pessoa '{nova_pessoa.nome} {nova_pessoa.sobrenome}' cadastrada com sucesso!")
+
+        elif opcao == 2: # Cadastrar Novo Banco
+            novo_banco = Banco.receber_do_teclado()
+            bancos.append(novo_banco)
+            print(f"Banco '{novo_banco.nome}' cadastrado com sucesso!")
+
+        elif opcao == 3: # Criar Nova Conta (agora via método do Banco)
+            if not pessoas:
+                print("Nenhuma pessoa cadastrada. Cadastre uma pessoa primeiro.")
+                continue
+            if not bancos:
+                print("Nenhum banco cadastrado. Cadastre um banco primeiro.")
+                continue
+
+            print("\n--- Criar Nova Conta ---")
+            cpf_pessoa = input("Informe o CPF do titular da conta (apenas números): ").replace('.', '').replace('-', '')
+            pessoa_existente = encontrar_pessoa_por_cpf(cpf_pessoa, pessoas)
+
+            if not pessoa_existente:
+                print("Pessoa não encontrada. Verifique o CPF.")
+                continue
+
+            num_banco_str = input("Informe o número do Banco onde a conta será criada: ")
+            try:
+                num_banco = int(num_banco_str)
+            except ValueError:
+                print("Número do banco inválido.")
+                continue
+            banco_existente = encontrar_banco_por_numero(num_banco, bancos)
+
+            if not banco_existente:
+                print("Banco não encontrado. Verifique o número do banco.")
+                continue
+
+            tipo_conta = input("Tipo de conta (cc para Corrente, cp para Poupança): ").lower()
+            
+            banco_existente.criar_conta(pessoa_existente, tipo_conta)
+            
+        elif opcao == 4: # Realizar Operação em Conta Existente
+            if not pessoas:
+                print("Nenhuma pessoa/conta cadastrada.")
+                continue
+
+            cpf_pessoa = input("Informe o CPF do titular da conta (apenas números): ").replace('.', '').replace('-', '')
+            pessoa_existente = encontrar_pessoa_por_cpf(cpf_pessoa, pessoas)
+
+            if not pessoa_existente:
+                print("Pessoa não encontrada.")
+                continue
+            
+            if not pessoa_existente.contas_bancarias:
+                print("Esta pessoa não possui contas cadastradas.")
+                continue
+
+            num_conta_str = input("Informe o número da conta para a operação: ")
+            try:
+                num_conta = int(num_conta_str)
+            except ValueError:
+                print("Número da conta inválido.")
+                continue
+
+            conta_escolhida = encontrar_conta_por_numero(num_conta, pessoa_existente)
+
+            if not conta_escolhida:
+                print("Conta não encontrada para esta pessoa.")
+                continue
+
+            senha_digitada = input("Informe a senha da conta: ")
+            if not conta_escolhida.verifica_senha(senha_digitada):
+                print("Senha incorreta. Operação não autorizada.")
+                continue
+
+            print("\n--- Operações da Conta ---")
+            print("a. Depositar")
+            print("b. Sacar")
+            print("c. Ver Saldo e Detalhes")
+
+            op_conta = input("Escolha a operação (a/b/c): ").lower()
+
+            if op_conta == 'a':
+                try:
+                    valor = float(input("Informe o valor para depósito: R$ "))
+                    conta_escolhida.deposito(valor)
+                except ValueError:
+                    print("Valor inválido para depósito.")
+            elif op_conta == 'b':
+                try:
+                    valor = float(input("Informe o valor para saque: R$ "))
+                    conta_escolhida.saque(valor)
+                except ValueError:
+                    print("Valor inválido para saque.")
+            elif op_conta == 'c':
+                conta_escolhida.info()
+            else:
+                print("Opção de operação inválida.")
+
+        elif opcao == 5: # Exibir Informações
+            print("\n--- Exibir Informações ---")
+            print("1. Informações de uma Pessoa")
+            print("2. Informações de um Banco")
+            print("3. Informações de uma Conta Específica")
+
+            info_opcao = input("Escolha o que deseja exibir (1/2/3): ")
+
+            if info_opcao == '1':
+                if not pessoas:
+                    print("Nenhuma pessoa cadastrada.")
+                    continue
+                cpf_pessoa = input("Informe o CPF da pessoa (apenas números): ").replace('.', '').replace('-', '')
+                pessoa_existente = encontrar_pessoa_por_cpf(cpf_pessoa, pessoas)
+                if pessoa_existente:
+                    pessoa_existente.info()
+                else:
+                    print("Pessoa não encontrada.")
+            elif info_opcao == '2':
+                if not bancos:
+                    print("Nenhum banco cadastrado.")
+                    continue
+                num_banco_str = input("Informe o número do Banco: ")
+                try:
+                    num_banco = int(num_banco_str)
+                except ValueError:
+                    print("Número do banco inválido.")
+                    continue
+                banco_existente = encontrar_banco_por_numero(num_banco, bancos)
+                if banco_existente:
+                    banco_existente.info_banco()
+                else:
+                    print("Banco não encontrado.")
+            elif info_opcao == '3':
+                if not pessoas:
+                    print("Nenhuma pessoa cadastrada para buscar contas.")
+                    continue
+                cpf_pessoa = input("Informe o CPF do titular da conta (apenas números): ").replace('.', '').replace(
+                    '-', '')
+                pessoa_existente = encontrar_pessoa_por_cpf(cpf_pessoa, pessoas)
+                if not pessoa_existente:
+                    print("Pessoa não encontrada.")
+                    continue
+                if not pessoa_existente.contas_bancarias:
+                    print("Esta pessoa não possui contas cadastradas.")
+                    continue
+                num_conta_str = input("Informe o número da conta para exibir informações: ")
+                try:
+                    num_conta = int(num_conta_str)
+                except ValueError:
+                    print("Número da conta inválido.")
+                    continue
+                conta_escolhida = encontrar_conta_por_numero(num_conta, pessoa_existente)
+                if conta_escolhida:
+                    conta_escolhida.info()
+                else:
+                    print("Conta não encontrada para esta pessoa.")
+            else:
+                print("Opção de exibição inválida.")
+
+        elif opcao == 6: # Simular Passagem de Mês
+            print("\n--- Simulação de Novo Mês ---")
+            contas_processadas = 0
+            for pessoa in pessoas:
+                for conta in pessoa.contas_bancarias:
+                    if isinstance(conta, ContaCorrente) or isinstance(conta, ContaPoupanca):
+                        conta.novo_mes()
+                        contas_processadas += 1
+            if contas_processadas > 0:
+                print(f"\nSimulação de mês concluída para {contas_processadas} contas.")
+            else:
+                print("Nenhuma conta para processar.")
+
+        elif opcao == 7: # Sair
+            print("Salvando dados antes de sair...")
+            save_data(pessoas, bancos)
+            print("Dados salvos com sucesso!")
+            print("Saindo do Sistema Bancário. Até mais!")
+            break
+        else:
+            print("Opção inválida. Por favor, escolha uma opção entre 1 e 7.")
+
+# Executa o programa principal
+if __name__ == "__main__":
+    main()

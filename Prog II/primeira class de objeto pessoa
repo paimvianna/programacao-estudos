@@ -1,0 +1,128 @@
+class Pessoa:
+    def __init__(self, nome, sobrenome, idade, cpf):
+        self.nome = nome
+        self.sobrenome = sobrenome
+        self.idade = idade
+        self.__contas_bancarias = [] # Corrigido: sintaxe e nome para consistência
+
+        # Atribua o CPF usando o setter para garantir validação inicial
+        # É importante que o setter esteja definido ANTES de __init__ tentar usá-lo,
+        # ou você pode passar o cpf sem validação inicial e validar em outro ponto.
+        # Para fins de exemplo, vamos chamar o setter.
+        self.cpf = cpf # Chama o setter para validar o CPF inicial
+
+    @classmethod
+    def receber_do_teclado(cls):
+        print(f'\n----Cadastro de Nova Pessoa ----\n')
+        nome = str(input('Informe o nome: '))
+        sobrenome = str(input('Informe o sobrenome: '))
+
+        while True:
+            try:
+                idade = int(input('Digite a idade: '))
+                if idade <= 0:
+                    print(f'A idade deve ser um valor positivo.')
+                    continue
+                break
+            except ValueError:
+                print('Entrada invalida para a idade. Digite um numero inteiro.')
+
+        # Coletar e validar o CPF aqui antes de criar o objeto
+        while True:
+            cpf_input = input('Informe o CPF (apenas números): ')
+            # Podemos tentar criar uma instância temporária ou usar uma função estática de validação
+            # A forma mais limpa é ter um método estático de validação do CPF.
+            if Pessoa.validar_cpf_estaticamente(cpf_input): # Supondo que você crie este método
+                break
+            else:
+                print("CPF inválido. Por favor, tente novamente.")
+
+        return cls(nome, sobrenome, idade, cpf_input) # Passando o CPF agora
+
+    # Método estático para validar CPF (útil para validação separada ou em @classmethod)
+    @staticmethod
+    def validar_cpf_estaticamente(cpf_str):
+        cpf_str = str(cpf_str).replace('.', '').replace('-', '') # Garante que é string e limpa
+
+        if not isinstance(cpf_str, str) or len(cpf_str) != 11 or not cpf_str.isdigit():
+            print("Erro: CPF deve ter 11 dígitos numéricos.")
+            return False
+
+        # Converte para lista de inteiros
+        cpf_numeros = [int(digito) for digito in cpf_str]
+
+        # Verifica CPFs com todos os dígitos iguais (ex: 111.111.111-11)
+        if len(set(cpf_numeros)) == 1:
+            print("Erro: CPF com todos os dígitos iguais é inválido.")
+            return False
+
+        # Validação do Primeiro Dígito Verificador
+        soma = 0
+        for i in range(9):
+            soma += cpf_numeros[i] * (10 - i)
+        resto = soma % 11
+        digito_esperado_1 = 0 if resto < 2 else 11 - resto
+        if cpf_numeros[9] != digito_esperado_1:
+            print(f'Erro: Primeiro dígito verificador ({cpf_numeros[9]}) incorreto. Esperado: {digito_esperado_1}.')
+            return False
+
+        # Validação do Segundo Dígito Verificador
+        soma = 0
+        for i in range(10):
+            soma += cpf_numeros[i] * (11 - i)
+        resto = soma % 11
+        digito_esperado_2 = 0 if resto < 2 else 11 - resto
+        if cpf_numeros[10] != digito_esperado_2:
+            print(f'Erro: Segundo dígito verificador ({cpf_numeros[10]}) incorreto. Esperado: {digito_esperado_2}.')
+            return False
+
+        return True # CPF válido!
+
+    @property # getter para o cpf
+    def cpf(self):
+        # Retorna o CPF formatado para exibição
+        return f'{self.__cpf[:3]}.{self.__cpf[3:6]}.{self.__cpf[6:9]}-{self.__cpf[9:]}'
+
+    @cpf.setter
+    def cpf(self, novo_cpf_str):
+        # O setter deve levantar uma exceção se a validação falhar
+        if not Pessoa.validar_cpf_estaticamente(novo_cpf_str):
+            raise ValueError("Tentativa de atribuir um CPF inválido.")
+        
+        # Se a validação passou, limpa e armazena
+        self.__cpf = str(novo_cpf_str).replace('.', '').replace('-', '')
+
+
+    # Exemplo de getter/setter para _contas_bancarias (se for necessário acesso controlado)
+    @property
+    def contas_bancarias(self):
+        return self.__contas_bancarias
+
+    # Geralmente, você não teria um setter direto para uma lista de objetos,
+    # mas métodos para adicionar/remover contas.
+    # Exemplo (você pode precisar de mais validação aqui):
+    def adicionar_conta(self, conta):
+        # Pode verificar se 'conta' é uma instância de ContaBancaria
+        self.__contas_bancarias.append(conta)
+
+    def info(self):
+        print(f"Nome: {self.nome} {self.sobrenome}")
+        print(f"Idade: {self.idade}")
+        print(f"CPF: {self.cpf}") # Chama o getter formatado
+        print(f"Contas bancárias: {len(self.contas_bancarias)}")
+        # Para listar as contas, você precisaria de um método info() nas contas ou iterar
+        for conta in self.contas_bancarias:
+            # Assumindo que ContaBancaria tem um método __str__ ou info()
+            print(f"  - {conta}")
+
+    # Método InfoContas() conforme o diagrama
+    def info_contas(self): # 
+        print(f"Contas de {self.nome} {self.sobrenome}:")
+        if not self.contas_bancarias:
+            print("  Nenhuma conta associada.")
+        else:
+            for conta in self.contas_bancarias:
+                # O diagrama pede um metodo InfoContas() em Pessoa 
+                # e tambem um metodo Info() em ContaBancaria e suas subclasses 
+                # O ideal seria que a conta tivesse um método __str__ ou info() próprio
+                print(f"  - {conta.info()}") # Assumindo que cada conta tem um método info()

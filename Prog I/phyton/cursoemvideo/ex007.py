@@ -1,0 +1,1 @@
+#Entrada ler duas notas de um aluno e calcule a media

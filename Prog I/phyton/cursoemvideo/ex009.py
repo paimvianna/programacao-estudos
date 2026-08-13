@@ -1,0 +1,1 @@
+#entrada informe um numero e apresente a tabuada do numero

@@ -1,0 +1,1 @@
+# entrada calcule a area e a quantidade de tinta sabendo que 1 litro de tinta cobre 2m²

@@ -1,0 +1,16 @@
+#Entrada
+valor = int(input('informe o valor que deseja: ')
+
+#processamento
+n100 = valor//100
+r100 = valor%100
+n20 = r100/20
+r20 = r100%20
+n5 = r20/5
+n1 = r20%5
+
+#Saída
+print(f'{n100} de 100')
+print(f'{n20} de 20')
+print(f'{n5} de 5')
+print(f'{n1} de 1')

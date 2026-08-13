@@ -1,0 +1,29 @@
+def carregar_banco(self):
+    self.conexoes_temporario = []
+    cidades_banco = open('cidades_banco.txt', 'r') #estou atribuindo
+
+    for linha in cidades_banco:
+        if linha.startswith('•'):
+            linha = linha[1:].strip()
+            linha_separador = linha.split(',')
+            if len(linha_separador) == 3:
+                cidade1 = linha_separador[0].strip()
+                cidade2 = linha_separador[1].strip()
+                distancia_str = linha_separador[2].replace('km','').strip()
+                distancia = float(distancia_str)
+                self.cadastra_cidades(cidade1)
+                self.cadastra_cidades(cidade2)
+
+            else:
+                print(f'Formato invalido para aresta.')
+            nome_cidade1 = cidade1.title()
+            nome_cidade2 = cidade2.title()
+            self.cadastra_conexao(nome_cidade1,nome_cidade2,distancia)
+    for aresta in self.conexoes_temporario:
+        aresta.info_aresta()
+
+def gravar_banco(self):
+    cidades_banco = open('cidades_banco.txt', 'w')
+            for aresta_pro_banco in self.conexoes:
+                linha = f'•{aresta_pro_banco.cidade1},{aresta_pro_banco.cidade2},{aresta_pro_banco.distancia}km\n'
+                cidades_banco.write(linha)

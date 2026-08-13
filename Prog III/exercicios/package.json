@@ -1,0 +1,19 @@
+{
+  "name": "exercicios_lista_1",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index_list1_1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "private",
+    "url": "github.com/paimvianna/curso_ads_ifrs"
+  },
+  "keywords": [
+    "manipilação_array"
+  ],
+  "author": "anderson_paim",
+  "license": "ISC"
+}

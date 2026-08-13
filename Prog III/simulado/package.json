@@ -1,0 +1,15 @@
+{
+  "name": "simulado",
+  "version": "1.0.0",
+  "description": "teste pra prova de hj",
+  "license": "ISC",
+  "author": "anderson paim",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.8.6"
+  }
+}
