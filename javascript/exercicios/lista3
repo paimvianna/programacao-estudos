@@ -1,0 +1,35 @@
+Lista 3 – Arrays
+
+Utilize a biblioteca readline-sync para realizar a entrada de dados e console.log para exibir os resultados.
+
+    Criação e impressão
+    Peça 5 nomes usando readline-sync, guarde-os em um array com push e mostre todos em um único console.log, separados por vírgula.
+    Tamanho do array
+    Peça números até o usuário digitar "fim", utilizando while. Ao final, mostre com console.log a quantidade de elementos usando length, o primeiro valor e o último valor do array.
+    Soma simples
+    Leia 5 números, armazene-os em um array e calcule a soma utilizando um for. Mostre a soma com console.log.
+    Média de pares
+    Leia 8 números e armazene-os em um array. Some apenas os números pares e mostre a média dos valores pares com console.log.
+    Presença no array
+    Peça uma lista com, no mínimo, 5 frutas. Depois, peça uma fruta para buscar. Utilize includes para verificar se ela existe. Caso exista, mostre também sua posição utilizando indexOf.
+    Última ocorrência
+    Peça 10 números, permitindo valores repetidos. Depois, peça um número alvo. Utilize lastIndexOf para mostrar a última posição em que o número aparece ou a mensagem "não encontrado".
+    Remoções controladas
+    Crie um array com 6 elementos informados pelo usuário. Remova um elemento do início utilizando shift e um elemento do fim utilizando pop. Mostre o array antes e depois das remoções.
+    Contar ocorrências
+    Leia 8 palavras e armazene-as em um array. Depois, peça uma palavra alvo. Percorra o array utilizando for e conte quantas vezes a palavra aparece. Mostre a quantidade com console.log.
+    Juntar duas listas sem usar concat
+    Peça 3 nomes da turma A e 3 nomes da turma B, armazenando-os em dois arrays. Crie um terceiro array e copie os nomes das duas turmas utilizando for e push. Mostre o array combinado.
+    Inverter um array
+    Leia 5 números e armazene-os em um array. Crie um segundo array e preencha-o percorrendo o primeiro array do fim para o início, utilizando for e push. Mostre o array invertido.
+    Inserir sem duplicados
+    Leia palavras e armazene-as em um array. Quando o usuário informar uma palavra que já existe no array, encerre a leitura e mostre o array com os valores inseridos.
+    Filtrar maiores que X
+    Leia 8 números e armazene-os em um array. Depois, peça um número X. Crie um novo array e, percorrendo o array original, adicione com push apenas os elementos maiores que X. Mostre o novo array.
+    Separar positivos e negativos
+    Leia 8 números. Crie dois arrays: um para os números positivos ou iguais a zero e outro para os números negativos. Utilize push para adicionar os valores e mostre os dois arrays com console.log.
+    Substituir todos os valores X por Y
+    Leia 8 itens do tipo texto e armazene-os em um array. Depois, peça os valores X e Y. Percorra o array e substitua todas as ocorrências de X por Y. Mostre o array antes e depois das substituições.
+    Acerte todos os números da lista fixa
+    Considere a lista fixa [5, 6, 9, 4, 3]. Leia números do usuário até que todos os valores da lista tenham sido acertados pelo menos uma vez. Não conte acertos repetidos. Ao final, mostre uma mensagem de sucesso e os números acertados utilizando console.log.
+

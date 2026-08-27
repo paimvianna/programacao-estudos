@@ -1,0 +1,29 @@
+
+Lista 4 - Programação (funções)
+Completion requirements
+Lista de Exercícios – Funções
+
+Utilize a biblioteca readline-sync para realizar a entrada de dados e console.log para exibir os resultados.
+
+    Função soma básica
+    Crie uma função somar(a, b) que retorna a soma de dois números. No programa principal, peça dois valores utilizando readline-sync, converta-os com Number, chame a função e mostre o resultado com console.log.
+    Média de 3
+    Implemente a função media3(a, b, c), que retorna a média aritmética de três números. Caso algum dos valores não seja um número, a função deve retornar null. No programa principal, trate esse retorno e mostre uma mensagem de erro ou o resultado da média com console.log.
+    Saudação com nome
+    Crie uma função saudar(nome) que monta e retorna a string "Olá, NOME!". No programa principal, leia o nome do usuário com readline-sync, chame a função e mostre a mensagem com console.log.
+    Máximo de um array
+    Crie uma função maximo(arr) que percorre um array e retorna o maior valor encontrado. Caso o array esteja vazio, a função deve retornar null. No programa principal, peça a quantidade de números que será informada, leia os valores, armazene-os em um array e teste a função.
+    Contar ocorrências
+    Escreva uma função contarOcorrencias(arr, alvo) que percorre o array utilizando for e retorna quantas vezes o valor alvo aparece. No programa principal, leia os elementos do array, peça o valor alvo e mostre a quantidade de ocorrências.
+    Filtrar maiores que X
+    Crie uma função maioresQue(arr, x) que retorna um novo array contendo apenas os elementos maiores que x. A função não deve modificar o array original. Utilize for e push.
+    Normalizar números
+    Crie uma função paraNumeros(arr) que recebe um array de strings e retorna um novo array com os valores convertidos utilizando Number. Caso algum valor não possa ser convertido para número, coloque 0 na posição correspondente.
+    Validação de entrada
+    Crie uma função lerNumero(mensagem) que continue solicitando um valor com readline-sync enquanto o usuário não informar um número válido. A função deve retornar o número convertido. Utilize essa função para ler três números, calcular e mostrar a média.
+    Compor funções simples
+    Crie as funções dobro(n ) e incrementar(n ), que retornam, respectivamente, o dobro de um número e o número acrescido de um. Depois, crie a função dobroMaisUm(n ), que utiliza as duas funções anteriores e retorna incrementar(dobro(n )). Leia um número com readline-sync e mostre o resultado com console.log.
+    Relatório de notas
+    Crie três funções: media(arr), que retorna a média das notas; maior(arr), que retorna a maior nota; e menor(arr), que retorna a menor nota. No programa principal, leia a quantidade de notas, armazene os valores em um array, chame as três funções e mostre um relatório com a média, a maior nota e a menor nota utilizando console.log.
+
+

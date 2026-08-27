@@ -1,0 +1,274 @@
+
+Lista 5 - Programação (métodos de array)
+Completion requirements
+
+Manipulação Array
+
+ 
+
+    Somar Todos os Elementos de um Array
+
+    Crie uma função que some todos os números de um array usando o método forEach.
+
+    Entrada: [1, 2, 3, 4, 5]
+
+    Saída esperada: 15
+
+    Multiplicar Cada Elemento por um Valor Específico
+
+    Crie uma função que multiplique cada elemento de um array por 2 e imprima o resultado no console.
+
+    Entrada: [1, 2, 3, 4]
+
+    Saída esperada (no console): 2, 4, 6, 8
+
+    Converter um Array de Celsius para Fahrenheit
+
+    Crie uma função que receba um array de temperaturas em Celsius e retorne um novo array com as temperaturas convertidas para Fahrenheit.
+
+    Entrada: [0, 20, 30]
+
+    Saída esperada: [32, 68, 86]
+
+    Criar um Array de Strings de Saudação
+
+    Dado um array de nomes, crie uma função que retorne um array de saudações personalizadas, por exemplo: "Olá, João!".
+
+    Entrada: ["João", "Maria", "Pedro"]
+
+    Saída esperada: ["Olá, João!", "Olá, Maria!", "Olá, Pedro!"]
+
+    Filtrar Números Pares
+
+    Crie uma função que filtre todos os números pares de um array.
+
+    Entrada: [1, 2, 3, 4, 5, 6]
+
+    Saída esperada: [2, 4, 6]
+
+    Filtrar Palavras Longas
+
+    Dado um array de palavras, crie uma função que retorne apenas as palavras que tenham mais de 5 letras.
+
+    Entrada: ["maçã", "banana", "abacaxi", "uva"]
+
+    Saída esperada: ["banana", "abacaxi"]
+
+    Somar Todos os Elementos de um Array com reduce
+
+    Crie uma função que use reduce para somar todos os números de um array.
+
+    Entrada: [1, 2, 3, 4, 5]
+
+    Saída esperada: 15
+
+    Encontrar o Produto de um Array
+
+    Crie uma função que use reduce para calcular o produto (multiplicação) de todos os elementos de um array.
+
+    Entrada: [1, 2, 3, 4]
+
+    Saída esperada: 24
+
+    Contar Ocorrências de um Valor
+
+    Crie uma função que conte quantas vezes um valor específico aparece em um array usando forEach.
+
+    Entrada: [1, 2, 2, 3, 2, 4], valor = 2
+
+    Saída esperada: 3
+
+    map e filter - Filtrar Palavras com 5 Caracteres e Transformar em Maiúsculas
+
+    Dado um array de palavras, crie uma função que filtre as palavras que têm exatamente 5 caracteres e, em seguida, use map para transformar essas palavras em letras maiúsculas.
+
+    Entrada: ["maçã", "uva", "banana", "abacaxi", "laranja", "ameixa", "pêra"]
+
+    Saída esperada: ["BANANA", "AMEIXA"]
+
+    Somar Valores Pares
+
+    Dado um array de números, crie uma função que filtre apenas os números pares e, em seguida, use reduce para somar esses valores.
+
+    Entrada: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    Saída esperada: 30 // (2 + 4 + 6 + 8 + 10 = 30)
+
+    Filtrar Produtos em Estoque
+
+    Dado um array de objetos que representam produtos (cada produto tem um nome, valor e quantidadeEmEstoque), crie uma função que filtre apenas os produtos que têm quantidade em estoque maior que 0.
+
+    Entrada:
+
+    const produtos = [
+      { nome: "Notebook", valor: 2500, quantidadeEmEstoque: 10 },
+      { nome: "Celular",  valor: 1500, quantidadeEmEstoque: 0 },
+      { nome: "Monitor",  valor: 800,  quantidadeEmEstoque: 5 },
+      { nome: "Teclado",  valor: 100,  quantidadeEmEstoque: 0 },
+      { nome: "Mouse",    valor: 50,   quantidadeEmEstoque: 20 }
+    ];
+
+    Saída esperada:
+
+    [
+      { nome: "Notebook", valor: 2500, quantidadeEmEstoque: 10 },
+      { nome: "Monitor",  valor: 800,  quantidadeEmEstoque: 5 },
+      { nome: "Mouse",    valor: 50,   quantidadeEmEstoque: 20 }
+    ]
+
+    Somar o Valor Total dos Produtos em Estoque
+
+    Usando o mesmo array de produtos do exercício anterior, crie uma função que some o valor total dos produtos em estoque (valor × quantidadeEmEstoque), considerando apenas os produtos com quantidadeEmEstoque > 0.
+
+    Saída esperada (para o array dado): 30000
+
+    Encontrar o Primeiro Número Maior que 10
+
+    Crie uma função que receba um array de números e use find para retornar o primeiro número maior que 10.
+
+    Entrada: [3, 8, 12, 5, 20]
+
+    Saída esperada: 12
+
+    Encontrar Aluno Aprovado
+
+    Dado um array de objetos alunos com propriedades nome e nota, use find para retornar o primeiro aluno com nota maior ou igual a 7.
+
+    Entrada:
+
+    const alunos = [
+      { nome: "João",  nota: 5.5 },
+      { nome: "Maria", nota: 6.8 },
+      { nome: "Pedro", nota: 7.2 },
+      { nome: "Ana",   nota: 9.0 }
+    ];
+
+    Saída esperada: { nome: "Pedro", nota: 7.2 }
+
+    Ordenar Nomes em Ordem Alfabética
+
+    Crie uma função que ordene um array de nomes em ordem alfabética usando sort.
+
+    Entrada: ["Maria", "Ana", "João", "Bruna"]
+
+    Saída esperada: ["Ana", "Bruna", "João", "Maria"]
+
+    Ordenar Produtos por Preço (Crescente)
+
+    Dado um array de produtos com propriedades nome e preco, use sort para ordenar os produtos do mais barato para o mais caro.
+
+    Entrada:
+
+    const produtos = [
+      { nome: "Teclado", preco: 100 },
+      { nome: "Mouse",   preco: 50 },
+      { nome: "Monitor", preco: 800 },
+      { nome: "Notebook",preco: 2500 }
+    ];
+
+    Saída esperada (ordem por preco): Mouse, Teclado, Monitor, Notebook
+
+    Encontrar Índice do Primeiro Número Maior que 50
+
+    Use findIndex para retornar o índice do primeiro número maior que 50.
+
+    Entrada: [10, 25, 60, 40, 80]
+
+    Saída esperada: 2
+
+    Encontrar Índice de Produto Sem Estoque
+
+    Dado um array de produtos com propriedades nome e estoque, use findIndex para encontrar o índice do primeiro produto com estoque igual a 0.
+
+    Entrada:
+
+    const produtos = [
+      { nome: "Caderno", estoque: 5 },
+      { nome: "Caneta",  estoque: 0 },
+      { nome: "Borracha",estoque: 2 }
+    ];
+
+    Saída esperada: 1
+
+    Unir Palavras em uma Frase
+
+    Crie uma função que receba um array de palavras e use join para formar uma frase separada por espaços.
+
+    Entrada: ["Eu", "gosto", "de", "JavaScript"]
+
+    Saída esperada: "Eu gosto de JavaScript"
+
+    Criar Código de Produto
+
+    Dado um array com partes de um código, use join para formar um código completo separado por "-".
+
+    Entrada: ["PROD", "2025", "XYZ"]
+
+    Saída esperada: "PROD-2025-XYZ"
+
+    Produto em Estoque Mais Caro
+
+    Use filter + sort + find.
+
+    Crie uma função que receba um array de produtos e retorne o produto em estoque mais caro.
+        Use filter para pegar apenas produtos com quantidadeEmEstoque > 0.
+        Use sort para ordenar pelo preço do menor para o maior.
+        Use find (ou o último elemento da lista) para obter o mais caro da lista filtrada.
+
+    Entrada:
+
+    const produtos = [
+      { nome: "Notebook", valor: 2500, quantidadeEmEstoque: 10 },
+      { nome: "Celular",  valor: 1500, quantidadeEmEstoque: 0 },
+      { nome: "Monitor",  valor: 800,  quantidadeEmEstoque: 5 },
+      { nome: "Mouse",    valor: 50,   quantidadeEmEstoque: 20 }
+    ];
+
+    Saída esperada: { nome: "Notebook", valor: 2500, quantidadeEmEstoque: 10 }
+
+    Relatório de Alunos Aprovados em Ordem Alfabética
+
+    Use filter + sort + map + join.
+
+    Crie uma função que receba um array de alunos e retorne uma string com os nomes dos alunos aprovados (nota ≥ 7), em ordem alfabética, separados por vírgula.
+
+    Entrada:
+
+    const alunos = [
+      { nome: "João",  nota: 6.5 },
+      { nome: "Maria", nota: 8.0 },
+      { nome: "Ana",   nota: 9.5 },
+      { nome: "Pedro", nota: 5.0 }
+    ];
+
+    Saída esperada: "Ana, Maria"
+
+    Índice do Primeiro Produto Muito Caro e Mensagem Formatada
+
+    Use findIndex + acesso ao array + template string.
+
+    Dado um array de produtos, encontre o índice do primeiro produto com valor > 1000 e monte uma mensagem de texto com o índice e o nome do produto.
+
+    Entrada:
+
+    const produtos = [
+      { nome: "Teclado",  valor: 100 },
+      { nome: "Mouse",    valor: 80 },
+      { nome: "Monitor",  valor: 900 },
+      { nome: "Notebook", valor: 3500 }
+    ];
+
+    Saída esperada: "Produto caro encontrado no índice 3: Notebook"
+
+    Soma dos Valores em Estoque (Apenas Disponíveis)
+
+    Use filter + map + reduce.
+
+    Com o mesmo array de produtos dos exercícios anteriores, crie uma função que calcule o valor total em reais dos produtos que têm quantidadeEmEstoque > 0.
+
+    Entrada: (mesmo array de produtos do exercício 12)
+
+    Saída esperada: 30000
+
+    Dica: Multiplique valor × quantidadeEmEstoque em um map e some tudo com reduce.
+

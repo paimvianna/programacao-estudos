@@ -1,0 +1,62 @@
+Lista de Exercícios 2 – Programação
+
+    Contagem regressiva
+    Peça um número N e faça contagem regressiva até 0 com while, mostrando cada número com alert.
+
+    Tabuada personalizada
+    Peça um número e mostre sua tabuada de 1 a 10 usando while.
+
+    Acumulador até zero
+    Peça números repetidamente. Some tudo. Pare quando o usuário digitar 0. Mostre a soma final.
+
+    Senha com 3 tentativas
+    Defina uma senha fixa. Permita até 3 tentativas com while. Mostre “Acesso permitido” ou “Acesso bloqueado”.
+
+    Números pares até N
+    Peça um número e mostre todos os pares de 1 até N com while.
+
+    Adivinha até acertar
+    Número secreto fixo. Continue perguntando até acertar. Ao final, mostre “Acertou!”.
+
+    Menu interativo simples
+    Menu: 1- “Olá”, 2- “Hoje é...”, 3- Sair. Use while para repetir até escolher sair.
+
+    Soma até limite
+    Peça um limite. Vá pedindo números e somando até ultrapassar o limite. Mostre o total.
+
+    Múltiplos de 3
+    Peça um número e liste todos os múltiplos de 3 até ele com while.
+
+    Maior número digitado
+    Peça números até o usuário digitar 0. Mostre qual foi o maior número digitado.
+
+    Contagem crescente
+    Peça um número N e conte de 1 até N com while, mostrando cada número.
+
+    Somar apenas positivos
+    Vá pedindo números e somando apenas os positivos. Pare quando digitar 0. Mostre a soma dos positivos.
+
+    Entrada validada (nota 0 a 10)
+    Peça uma nota. Enquanto estiver fora do intervalo [0, 10], continue pedindo. Ao final, mostre a nota válida.
+
+    Calculadora em loop
+    Enquanto o usuário não digitar “sair”, peça dois números e uma operação + - * /. Use if para calcular e alert para mostrar.
+
+    Múltiplos de X até um limite
+    Peça um número base X e um limite L. Liste todos os múltiplos de X até L com while.
+
+    Contar pares e ímpares
+    Peça números até digitar 0. No fim, mostre quantos eram pares e quantos ímpares.
+
+    Maior e menor
+    Peça números até 0. No final, mostre maior e menor valores digitados (desconsidere o 0).
+
+    Adivinha com dica
+    Número secreto fixo. Enquanto errar, diga se o palpite é maior ou menor que o segredo. Quando acertar, mostre quantas tentativas foram necessárias.
+
+    Somatório de 1 até N
+    Peça N e calcule a soma 1 + 2 + ... + N usando while. Mostre o resultado.
+
+    Tabela °C → °F
+    Peça um número N. De 1 até N, mostre uma tabelinha com o valor em °C e sua conversão para °F (F = C * 9/5 + 32) usando while.
+

@@ -1,0 +1,40 @@
+
+Lista 1 - Programação (Condicional)
+Completion requirements
+Lista de Exercícios – Programação (JavaScript)
+
+    1.Olá, usuário!
+        Peça o nome do usuário utilizando o readline-sync.
+        Mostre uma mensagem de boas-vindas com console.log usando concatenação.
+    2.Soma de dois números
+        Peça dois números.
+        Converta com Number e mostre a soma no console.
+    3.Média simples
+        Peça três notas.
+        Calcule a média aritmética e exiba no console.
+    4.Par ou ímpar
+        Peça um número.
+        Use % para verificar se é par ou ímpar e mostre o resultado.
+    5.Maior de idade
+        Peça a idade.
+        Se idade ≥ 18, mostre “Maior de idade”; caso contrário, “Menor de idade”.
+    6.Calculadora simples
+        Peça dois números e uma operação (+, -, *, /).
+        Use if para decidir a operação e exiba o resultado no console.
+    7.Comparação de dois números
+        Peça dois números.
+        Informe qual é o maior ou se são iguais.
+    8.Aprovado ou reprovado
+        Peça duas notas.
+        Calcule a média.
+        Se média ≥ 7, mostre “Aprovado”; senão, “Reprovado”.
+    9.Login simples
+        Variáveis fixas: usuario = "admin" e senha = "1234".
+        Peça usuário e senha utilizando o readline-sync.
+        Se ambos corretos, “Acesso permitido”; caso contrário, “Acesso negado”.
+    10.Jogo do número secreto
+        Defina um número secreto fixo (ex.: 7).
+        Peça um palpite.
+        Se acertar, “Acertou!”; senão, “Errou, o número era 7”.
+
+
