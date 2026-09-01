@@ -1,3 +1,4 @@
+#fazer analise da memoria como no primeiro dia
 from collections import deque
 
 class Fila:
