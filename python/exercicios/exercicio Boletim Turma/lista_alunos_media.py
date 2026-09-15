@@ -118,8 +118,9 @@ class ListaMedias:
                                 "Capacidade esgotada.")
     
         posicao = self.total_elementos
+        
         for i in range(self.total_elementos):        
-            if aluno.media < self.estudantes[i].media:
+            if aluno.media > self.estudantes[i].media:
                 posicao = i
                 break
         for i in range(self.total_elementos-1, posicao - 1, -1):

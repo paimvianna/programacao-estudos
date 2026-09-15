@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.2",
+    "readline-sync": "^1.4.10"
+  },
+  "name": "aula-14-06-26",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "anderson",
+  "license": "ISC",
+  "description": ""
+}
