@@ -1,0 +1,16 @@
+{
+  "name": "14-06-26-clinicamedica",
+  "version": "1.0.0",
+  "description": "sistema de clinica medica",
+  "license": "ISC",
+  "author": "anderson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.2",
+    "readline-sync": "^1.4.10"
+  }
+}

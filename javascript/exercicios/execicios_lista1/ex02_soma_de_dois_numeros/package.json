@@ -1,0 +1,19 @@
+{
+  "name": "ex02_soma_de_dois_numeros",
+  "version": "1.0.0",
+  "description": "soma de dois numeros",
+  "repository": {
+    "type": "git",
+    "url": "paimvianna"
+  },
+  "license": "ISC",
+  "author": "anderson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
