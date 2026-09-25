@@ -16,13 +16,15 @@ const numero2 = readlineSync.question('Por favor informe o segundo numero: ');
 console.log(`O resultado da soma de ${numero1} + ${numero2} = ${sumNumbers(numero1, numero2)}`);
 */
 function soma(a,b){
-        return a + b;
+      a = Number(a);
+      b = Number(b);
+      return a + b;
 }
 
 let numero1 = readlineSync.question('Por favor informe o primeiro numero: ');
-numero1 = Number(numero1);
+//numero1 = Number(numero1);
 
 let numero2 = readlineSync.question('Por favor informe o segundo numero: ');
-numero2 = Number(numero2);
+//numero2 = Number(numero2);
 
-console.log(`O resultado da soma de ${numero1} + ${numero2} = ${soma(numero1,numero2)}`)
+console.log(`O resultado da soma de ${numero1} + ${numero2} = ${soma(numero1,numero2)}`);
