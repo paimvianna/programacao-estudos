@@ -1,0 +1,66 @@
+Trabalho 7
+• Objetivo:
+• Desenvolver um projeto em Python para testar e comparar o
+desempenho computacional de 4 algoritmos de ordenação
+(BubbleSort, SelectionSort, InsertionSort e QuickSort).
+• Cargas de Teste:
+• Tamanhos de vetor: 1.000, 10.000, 50.000, 100.000, 500.000 e
+1.000.000 de elementos gerados aleatoriamente.
+• Diretrizes Metodológicas:
+• Medições estritamente focadas no tempo de execução do método de
+ordenação (desprezando a alocação inicial de memória).
+• Utilizar exatamente o mesmo conjunto de dados de teste para garantir
+justiça na comparação algorítmica.
+• Entregas (para dia 23/10):
+• Código modularizado, instruções de execução e relatório técnico
+comparativo com gráficos ou tabelas de tempo e suas justificativas de
+desempenho e comparações entre os diferentes métodos.
+
+==============================================================================================================================
+                                VETOR 1000 ELEMENTOS
+==============================================================================================================================
+Selection Sort.                 Insertion Sort                  Bubble Sort                     Quick Sort
+1° tempo:0.020355739000024187   1° tempo:0.01948784300020634    1° tempo:0.0358136560003004     1° tempo:0.0020255579997865425
+2° tempo:0.021257127999888326   2° tempo:0.014743576000000758   2° tempo:0.035425662999841734   2° tempo:0.0023474469999200664
+3° tempo:0.02031928499991409    3° tempo:0.017815836000409035   3° tempo:0.03532991599968227    3° tempo:0.001671087999966403
+
+
+=============================================================================================================================
+                                VETOR 10000 ELEMENTOS
+=============================================================================================================================
+Selection Sort.                 Insertion Sort                  Bubble Sort                     Quick Sort
+1° tempo:1.4380243000000519     1° tempo:1.406018098000004      1° tempo:3.2178061650001837     1° tempo:0.014657265000096231
+2° tempo:1.4198631510002997     2° tempo:1.48414467900011       2° tempo:3.237773407000077      2° tempo:0.021002520999900298
+3° tempo:1.4330611129998942     3° tempo:1.4184179069998208     3° tempo:3.2214423939999506     3° tempo:0.015926612999919598
+
+=============================================================================================================================
+                                VETOR 50000 ELEMENTOS
+=============================================================================================================================
+Selection Sort.                 Insertion Sort                  Bubble Sort                     Quick Sort
+1° tempo:37.2060956979999       1° tempo:37.43719883999984      1° tempo:85.5608272469999       1° tempo:0.05445391900002505
+2° tempo:37.25556466599937      2° tempo:37.40575657199952      2° tempo:84.73950126599993      2° tempo:0.05826500399962242
+3° tempo:37.356602263999775     3° tempo:38.3275708329993       3° tempo:86.1216702190004       3° tempo:0.05667435699979251
+
+=============================================================================================================================
+                                VETOR 100000 ELEMENTOS
+=============================================================================================================================
+Selection Sort.                 Insertion Sort                  Bubble Sort                     Quick Sort
+1° tempo:152.9964623679998      1° tempo:155.97760100600044     1° tempo:347.83073386900014     1° tempo:0.11629263199938578
+2° tempo:152.29631377600072     2° tempo:155.24975492700014     2° tempo:348.87773828900026     2° tempo:0.11528685299981589
+3° tempo:151.30521093099924     3° tempo:154.11367955400056     3° tempo:343.3959915180003      3° tempo:0.11384839199945418
+
+=============================================================================================================================
+                                VETOR 500000 ELEMENTOS
+=============================================================================================================================
+Selection Sort.                 Insertion Sort                  Bubble Sort                     Quick Sort
+1° tempo:                       1° tempo:                       1° tempo:                       1° tempo:0.7998927810003806
+2° tempo:                       2° tempo:                       2° tempo:                       2° tempo:0.7981377910000447
+3° tempo:6890.808843553001      3° tempo:8084.275122979001      3° tempo:12732.133798585        3° tempo:0.8483960900002785
+
+=============================================================================================================================
+                                VETOR 1000000 ELEMENTOS
+=============================================================================================================================
+Selection Sort.                 Insertion Sort                  Bubble Sort                     Quick Sort
+1° tempo:                       1° tempo:                       1° tempo:                       1° tempo:0.7998927810003806
+2° tempo:                       2° tempo:                       2° tempo:                       2° tempo:0.7981377910000447
+3° tempo:                       3° tempo:                       3° tempo:                       3° tempo:0.8483960900002785

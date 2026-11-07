@@ -1,0 +1,206 @@
+Trabalho 6
+• Objetivo:
+    • Medir e comparar o desempenho prático de execução dos 3 algoritmos de
+    busca estudados (“Busca Linear”, “Busca Linear Ordenada” e “Busca Binária”)
+    utilizando o módulo time (time.perf_counter()).
+• Cargas de Teste:
+    • Tamanhos de vetor: 1.000, 5.000, 10.000, 50.000, 100.000, 500.000 e
+    1.000.000 de elementos.
+• Diretrizes Metodológicas:
+    • As medições de tempo devem isolar estritamente a chamada da função
+    de busca (desprezando a geração de números e a ordenação prévia).
+    • Reutilizar exatamente o mesmo conjunto de dados gerado para todos os
+    algoritmos na mesma rodada de testes.
+• Entregas (para dia 23/10):
+    • Código-fonte documentado, instruções claras de execução e relatório analítico
+    de desempenho
+"""
+========================================================================================================
+                                VETOR 1000 ELEMENTOS
+========================================================================================================
+vetor desordenado:
+vetor ordenado:
+
+
+linear:
+numero: 93
+indice:502
+tempo:1°5.0865000957855955e-05, 2°4.6265999117167667e-05, 3°4.468299994186964e-05
+
+ordenando por bubblesort
+linear:
+numero:93
+indice:524
+tempo:1°3.049700171686709e-05, 2°7.046099926810712e-05, 3°5.6195000070147216e-05
+
+linear ordenada:
+numero:93
+indice:524
+tempo:1°9.686999874247704e-05, 2°7.459900007233955e-05, 3°9.121000039158389e-05
+
+binaria.
+numero:93
+indice:526
+tempo:1°2.6099000024260022e-05, 2°1.6381000023102388e-05, 3°1.1852000170620158e-05
+
+=======================================================================================================
+                                VETOR 5000 ELEMENTOS
+=======================================================================================================
+vetor desordenado:
+
+vetor ordenado:
+
+linear:
+numero:-146
+indice:2
+tempo:1°1.516900010756217e-05, 2°1.9589999965319294e-05,3°7.755999831715599e-06
+
+ordenando por bubblesort
+
+
+linear:
+numero:-146
+indice:2360
+tempo:1°0.0005121409999446769, 2°0.00032715299994379166, 3°0.00030429299999923387
+
+lista ordenada:
+numero:-146
+indice:2360
+tempo:1°0.00046302700002343045,2°0.00039194600003611413,3°0.0003124950003439153
+
+binaria:
+numero:-146
+indice:2361
+tempo:1°2.061299983324716e-05, 2°2.209900003435905e-05,3°1.4441000075748889e-05
+
+======================================================================================================
+                            VETOR LINEAR 10000
+======================================================================================================
+vetor desordenado:
+
+
+linear:
+numero:-421
+indice:2
+tempo:1°2.065400002493334e-05,2°1.5313000062633364e-05,3°1.190000000406144e-05
+
+vetor ordenado por quick sort
+
+linear:
+numero:-421
+indice:4682
+tempo:1°0.0008052949999637349,2°0.0005906779999804712,3°0.0005753890000050887
+
+linear ordenada:
+numero:-421
+indice:4682
+tempo:1°0.0006190420001530583, 2°0.0007258560001446313, 3°0.000657627999999022
+
+binaria.
+numero:-421
+indice:4683
+tempo:1°1.612899995961925e-05, 2°2.360300004511373e-05, 3°1.516700012871297e-05
+
+======================================================================================================
+                            VETOR LINEAR 50000
+======================================================================================================
+vetor desordenado:
+ 
+linear:
+numero:-4737
+indice:36508
+tempo:0.002011439999932918
+
+vetor ordenado:
+linear:
+numero:-4737
+indice:22573
+tempo:0.0032145430000127817
+
+linear ordenado:
+numero:-4737
+indice:22573
+tempo:0.0032201279996115773
+
+binario:
+numero:-4737
+indice:22573
+tempo:2.934299982371158e-05
+
+======================================================================================================
+                            VETOR LINEAR 100000
+======================================================================================================
+vetor desordenado:
+linear:
+numero:26600
+indice:87010
+tempo:0.0058409909997863
+
+vetor ordenado:
+linear:
+numero:26600
+indice:63002
+tempo:0.0080499650002821
+
+linear ordenado:
+numero:26600
+indice:63002
+tempo:0.008350916000381403
+
+binario:
+numero:26600
+indice:63002
+tempo:2.18700006371364e-05
+
+======================================================================================================
+                            VETOR LINEAR 500000
+======================================================================================================
+
+vetor desordenado:
+linear:
+numero:191842
+indice: 301763
+tempo:0.013012919999709993
+
+vetor ordenado:
+linear:
+numero:191842
+indice:345856
+tempo:0.04321818300013547
+
+linear ordenado:
+numero:191842
+indice:345856
+tempo:0.044295570999565825
+
+binario:
+numero:191842
+indice:345856 ou 345857
+tempo:1º2.1438999283418525e-05,2°2.3693000002822373e-05,3°1.7129999832832254e-05
+
+======================================================================================================
+                            VETOR LINEAR 1000000
+======================================================================================================
+
+vetor desordenado:
+linear:
+numero:683186
+indice:988535
+tempo:0.029784125999867683
+
+vetor ordenado:
+
+linear:
+numero:683186
+indice:842138
+tempo:0.10443306300021504
+
+linear ordenado:
+numero:683186
+indice:842138
+tempo:0.11391300000013871
+
+binario:
+numero:683186
+indice:842138
+tempo:3.1055999897944275e-05

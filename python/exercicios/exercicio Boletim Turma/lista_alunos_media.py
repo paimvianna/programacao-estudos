@@ -26,7 +26,7 @@ class Aluno:
 
     def __str__(self):
         """Retorna as informações de aluno."""
-        return f"+++Aluno: +++\nMatricula: {self.codigo_inscricao}\nNome: {self.nome}\n{self.media}"
+        return f"+++Aluno: +++\nMatricula: {self.codigo_inscricao}\nNome: {self.nome}\nMedia: {self.media}"
 
     def __eq__(self, outro):
         """

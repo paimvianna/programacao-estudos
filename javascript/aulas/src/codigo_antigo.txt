@@ -1,0 +1,38 @@
+(errado)
+
+import { useState } from "react"
+
+function Pergunta(props){
+  let retornoDoUseState = useState("")
+  let resultado = retornoDoUseState[0] //valor atual do estado
+  let funcaoQueMudaoValorDoEstado = retornoDoUseState[1]
+  
+
+  function responder(respostaUsuario){
+    //alert(props.resposta)
+    if (props.resposta ==respostaUsuario){
+      funcaoQueMudaoValorDoEstado("Você acertou!")
+    }else{
+      funcaoQueMudaoValorDoEstado("Você errou!")
+    }
+    {/* proxima aula: estado, para colocar uma mensagem ao inves de um alert */}
+  }
+  return <div>
+    <h3>{props.texto}</h3>
+    <button onClick={()=>responder("verdadeiro")}>Verdadeiro</button>
+    <button onClick={()=>responder("falso")}>Falso</button>
+    {resultado /*retorna o estado*/}
+  </div>
+
+}
+
+export default function App(){
+  return <div>
+    <h1>Quiz</h1>
+    <Pergunta texto="1km tem exatamente 500m" resposta="falso"/>
+  <Pergunta texto="POA é a capital do RS?" resposta="verdadeiro"/>
+    </div>
+
+}
+
+

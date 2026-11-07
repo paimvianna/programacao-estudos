@@ -1,0 +1,9 @@
+Domínio 4: Pátio de Manobras (Trilhos Sem Saída)
+• Carga Útil (elemento): Objeto Vagao (id_vagao,
+tipo_carga).
+• Desafio: Uma composição de trem entra de ré em um
+trilho de manutenção sem saída. Para retirar um vagão
+defeituoso do meio da composição, a locomotiva deve
+puxar os vagões da frente para um trilho de desvio (Pilha
+Auxiliar). Após isolar a manutenção, os vagões retornam
+ao trilho principal.

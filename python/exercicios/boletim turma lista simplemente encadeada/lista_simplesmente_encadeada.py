@@ -119,6 +119,7 @@ class ListaSimplesmenteEncadeada:
             novo_nodo = Nodo(valor, self.primeiro)
             self.primeiro = novo_nodo
             self.total_de_elementos += 1
+            return
 
         atual = self.primeiro
 

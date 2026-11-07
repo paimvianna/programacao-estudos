@@ -1,0 +1,19 @@
+{
+  "name": "ex10_jogo_do_numero_secreto",
+  "version": "1.0.0",
+  "description": "jogo do numero secreto",
+  "repository": {
+    "type": "git",
+    "url": "paimvianna"
+  },
+  "license": "ISC",
+  "author": "anderson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}

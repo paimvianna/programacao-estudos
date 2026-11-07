@@ -1,0 +1,16 @@
+{
+  "name": "ex05_adivinhar_ate_acertar",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "paimvianna"
+  },
+  "license": "ISC",
+  "author": "anderson",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
