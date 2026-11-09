@@ -1,0 +1,339 @@
+Lista de Exercícios – Componentes React e Props
+
+1. Componente Alerta
+
+Crie um componente chamado Alerta que receba as seguintes props:
+
+    tipo: uma string que pode receber os valores "erro", "sucesso" ou "aviso".
+    texto: uma string contendo a mensagem que deverá ser exibida.
+
+O componente deve verificar o valor da prop tipo e modificar a forma de apresentação da mensagem. Você pode, por exemplo, utilizar uma cor diferente, negrito ou acrescentar uma identificação textual para cada tipo.
+
+O componente pai deve renderizar pelo menos um exemplo de cada tipo de alerta.
+Exemplo de chamada
+
+<Alerta tipo="erro" texto="Não foi possível salvar os dados." />
+<Alerta tipo="sucesso" texto="Cadastro realizado com sucesso." />
+<Alerta tipo="aviso" texto="Existem campos que precisam ser revisados." />
+
+Exemplo de resultado esperado
+
+Erro: Não foi possível salvar os dados.
+
+Sucesso: Cadastro realizado com sucesso.
+
+Aviso: Existem campos que precisam ser revisados.
+2. Componente UserCard
+
+Crie um componente chamado UserCard para representar um cartão contendo informações de um usuário.
+
+O componente deve receber as seguintes props:
+
+    nome: nome do usuário.
+    idade: idade do usuário.
+    cidade: cidade onde o usuário mora.
+
+O componente deve exibir cada informação em uma linha separada. No componente pai, renderize manualmente vários componentes UserCard, utilizando informações diferentes em cada um.
+Exemplo de chamada
+
+<UserCard nome="Ana" idade={25} cidade="Porto Alegre" />
+<UserCard nome="Carlos" idade={31} cidade="Canoas" />
+
+Exemplo de resultado esperado
+Ana
+
+Idade: 25 anos
+
+Cidade: Porto Alegre
+Carlos
+
+Idade: 31 anos
+
+Cidade: Canoas
+3. Componente NotaAluno
+
+Crie um componente chamado NotaAluno que receba as props nome e nota.
+
+Se a nota for maior ou igual a 7, o componente deve exibir Aprovado. Caso contrário, deve exibir Reprovado.
+
+O componente pai deve criar exemplos de alunos com notas diferentes, incluindo pelo menos um aluno aprovado e um reprovado.
+Exemplo de chamada
+
+<NotaAluno nome="Mariana" nota={8.5} />
+<NotaAluno nome="Pedro" nota={5.5} />
+
+Exemplo de resultado esperado
+
+Mariana - Nota: 8.5 - Aprovado
+
+Pedro - Nota: 5.5 - Reprovado
+4. Componente Produto
+
+Crie um componente chamado Produto que receba:
+
+    nome: nome do produto.
+    preco: preço do produto.
+    emPromocao: valor booleano que indica se o produto está em promoção.
+
+O componente deve sempre exibir o nome e o preço. Quando emPromocao for true, também deve exibir a mensagem Em promoção!.
+Exemplo de chamada
+
+<Produto nome="Teclado" preco={120} emPromocao={true} />
+<Produto nome="Mouse" preco={80} emPromocao={false} />
+
+Exemplo de resultado esperado
+
+Teclado - R$ 120,00 - Em promoção!
+
+Mouse - R$ 80,00
+5. Componente Mensagem
+
+Crie um componente chamado Mensagem que receba:
+
+    texto: conteúdo da mensagem.
+    prioridade: pode receber "alta" ou "baixa".
+
+Quando a prioridade for "alta", a mensagem deve ser apresentada em destaque, por exemplo, utilizando texto em negrito. Quando a prioridade for "baixa", o texto deve ser apresentado normalmente.
+Exemplo de chamada
+
+<Mensagem texto="Servidor indisponível." prioridade="alta" />
+<Mensagem texto="Atualização disponível." prioridade="baixa" />
+
+Exemplo de resultado esperado
+
+Servidor indisponível.
+
+Atualização disponível.
+6. Componente StatusUsuario
+
+Crie um componente chamado StatusUsuario que receba:
+
+    nome: nome do usuário.
+    status: pode receber "online", "offline" ou "ocupado".
+
+O componente deve mostrar o nome do usuário e seu status atual. Os diferentes estados devem ser apresentados de forma distinta, podendo ser utilizadas cores, negrito ou outras propriedades de estilo.
+Exemplo de chamada
+
+<StatusUsuario nome="João" status="online" />
+<StatusUsuario nome="Maria" status="offline" />
+<StatusUsuario nome="Lucas" status="ocupado" />
+
+Exemplo de resultado esperado
+
+João - Online
+
+Maria - Offline
+
+Lucas - Ocupado
+7. Componente BotaoAcao
+
+Crie um componente chamado BotaoAcao que receba:
+
+    texto: texto apresentado dentro do botão.
+    desabilitado: valor booleano que indica se o botão está desabilitado.
+
+Quando desabilitado for true, o botão deverá possuir o atributo disabled. Quando for false, o botão deverá permanecer habilitado.
+Exemplo de chamada
+
+<BotaoAcao texto="Salvar" desabilitado={false} />
+<BotaoAcao texto="Excluir" desabilitado={true} />
+
+Exemplo de resultado esperado
+Salvar Excluir
+8. Componente CaixaTema
+
+Crie um componente chamado CaixaTema que receba:
+
+    tema: pode receber "claro" ou "escuro".
+    conteudo: texto apresentado dentro da caixa.
+
+O componente deve alterar sua aparência conforme o tema recebido. No tema claro, pode utilizar fundo claro e texto escuro. No tema escuro, pode utilizar fundo escuro e texto claro.
+Exemplo de chamada
+
+<CaixaTema tema="claro" conteudo="Conteúdo utilizando o tema claro." />
+<CaixaTema tema="escuro" conteudo="Conteúdo utilizando o tema escuro." />
+
+Exemplo de resultado esperado
+
+Conteúdo utilizando o tema claro.
+
+Conteúdo utilizando o tema escuro.
+9. Componente PrecoParcelado
+
+Crie um componente chamado PrecoParcelado que receba:
+
+    precoTotal: valor total da compra.
+    parcelas: quantidade de parcelas.
+
+O componente deve calcular o valor de cada parcela dividindo precoTotal por parcelas.
+
+O resultado deve ser apresentado no formato R$ X,XX em Nx de R$ Y,YY.
+Exemplo de chamada
+
+<PrecoParcelado precoTotal={1200} parcelas={10} />
+<PrecoParcelado precoTotal={500} parcelas={4} />
+
+Exemplo de resultado esperado
+
+R$ 1.200,00 em 10x de R$ 120,00
+
+R$ 500,00 em 4x de R$ 125,00
+10. Componente FilmeCard
+
+Crie um componente chamado FilmeCard que receba:
+
+    titulo: título do filme.
+    genero: gênero do filme.
+    classificacao: idade mínima recomendada.
+
+Se a classificação for menor que 12, o componente deve exibir Livre para a maioria das idades. Caso seja maior ou igual a 12, deve exibir Classificação: X anos.
+Exemplo de chamada
+
+<FilmeCard titulo="Aventura no Espaço" genero="Aventura" classificacao={10} />
+<FilmeCard titulo="Mistério da Cidade" genero="Suspense" classificacao={16} />
+
+Exemplo de resultado esperado
+Aventura no Espaço
+
+Gênero: Aventura
+
+Livre para a maioria das idades
+Mistério da Cidade
+
+Gênero: Suspense
+
+Classificação: 16 anos
+11. Componente TituloDinamico
+
+Crie um componente chamado TituloDinamico que receba:
+
+    texto: conteúdo do título.
+    nivel: pode receber "h1", "h2" ou "h3".
+
+O componente deve verificar o valor de nivel e renderizar o texto utilizando a tag HTML correspondente.
+Exemplo de chamada
+
+<TituloDinamico texto="Título Principal" nivel="h1" />
+<TituloDinamico texto="Título Secundário" nivel="h2" />
+<TituloDinamico texto="Título Menor" nivel="h3" />
+
+Exemplo de resultado esperado
+Título Principal
+Título Secundário
+Título Menor
+12. Componente FraseIdioma
+
+Crie um componente chamado FraseIdioma que receba:
+
+    textoPortugues: frase em português.
+    textoIngles: frase em inglês.
+    idiomaAtual: pode receber "pt" ou "en".
+
+Quando idiomaAtual for "pt", deve ser exibido textoPortugues. Quando for "en", deve ser exibido textoIngles.
+Exemplo de chamada
+
+<FraseIdioma
+  textoPortugues="Bem-vindo ao sistema"
+  textoIngles="Welcome to the system"
+  idiomaAtual="pt"
+/>
+
+<FraseIdioma
+  textoPortugues="Bem-vindo ao sistema"
+  textoIngles="Welcome to the system"
+  idiomaAtual="en"
+/>
+
+Exemplo de resultado esperado
+
+Bem-vindo ao sistema
+
+Welcome to the system
+13. Componente PlacarJogo
+
+Crie um componente chamado PlacarJogo que receba:
+
+    timeA: nome do primeiro time.
+    timeB: nome do segundo time.
+    pontosA: pontuação do primeiro time.
+    pontosB: pontuação do segundo time.
+
+O componente deve comparar os pontos e informar qual time está vencendo. Caso os valores sejam iguais, deve informar que o jogo está empatado.
+Exemplo de chamada
+
+<PlacarJogo
+  timeA="Azul"
+  timeB="Vermelho"
+  pontosA={3}
+  pontosB={1}
+/>
+
+<PlacarJogo
+  timeA="Verde"
+  timeB="Amarelo"
+  pontosA={2}
+  pontosB={2}
+/>
+
+Exemplo de resultado esperado
+
+Azul: 3
+
+Vermelho: 1
+
+Azul está vencendo.
+
+Verde: 2
+
+Amarelo: 2
+
+Empate.
+14. Componente ProgressoTarefa
+
+Crie um componente chamado ProgressoTarefa que receba:
+
+    nome: nome da tarefa.
+    porcentagem: número entre 0 e 100.
+
+Se a porcentagem for igual a 100, o componente deve mostrar Concluída. Para valores menores que 100, deve mostrar Em andamento: X%.
+Exemplo de chamada
+
+<ProgressoTarefa nome="Criar interface" porcentagem={40} />
+<ProgressoTarefa nome="Criar banco de dados" porcentagem={100} />
+
+Exemplo de resultado esperado
+
+Criar interface - Em andamento: 40%
+
+Criar banco de dados - Concluída
+15. Componente ResumoFinanceiro
+
+Crie um componente chamado ResumoFinanceiro que receba:
+
+    receitas: valor total das receitas.
+    despesas: valor total das despesas.
+
+O componente deve calcular o saldo subtraindo as despesas das receitas:
+
+saldo = receitas - despesas
+
+Após realizar o cálculo:
+
+    Se o saldo for maior que zero, mostrar Saldo positivo: R$ X,XX.
+    Se o saldo for igual a zero, mostrar Saldo zerado.
+    Se o saldo for menor que zero, mostrar Saldo negativo: R$ X,XX.
+
+O componente pai deve testar as três situações: saldo positivo, saldo zerado e saldo negativo.
+Exemplo de chamada
+
+<ResumoFinanceiro receitas={5000} despesas={3200} />
+<ResumoFinanceiro receitas={3000} despesas={3000} />
+<ResumoFinanceiro receitas={2500} despesas={4000} />
+
+Exemplo de resultado esperado
+
+Saldo positivo: R$ 1.800,00
+
+Saldo zerado
+
+Saldo negativo: R$ -1.500,00

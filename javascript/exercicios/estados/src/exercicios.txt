@@ -1,0 +1,61 @@
+
+1.Crie um componente com um botão “Mostrar/Esconder”. 
+Ao clicar, o componente deve alternar entre exibir e 
+não exibir uma mensagem de texto na tela.
+
+2.Crie um componente que exibe uma área de conteúdo 
+com um texto e um botão “Alternar tema”. Ao clicar, 
+o componente deve alternar entre dois temas visuais 
+(por exemplo: fundo claro com texto escuro e fundo 
+escuro com texto claro), modificando o estilo dessa área.
+
+3.Crie um componente que mostra o valor de um “volume” 
+e dois botões: “Aumentar” e “Diminuir”. Os botões devem 
+alterar o valor do volume, respeitando um limite mínimo 
+(0) e máximo (100), e o valor atual deve ser exibido na tela.
+
+4.Crie um componente que mostra na tela o estado de um 
+semáforo (vermelho, amarelo ou verde) e um botão “Próxima cor”. 
+Cada clique deve avançar para a próxima cor em uma sequência 
+cíclica, e o texto exibido deve mudar de cor de acordo 
+com o estado (vermelho, amarelo ou verde).
+
+5.Crie um componente com um botão “Clique uma vez”. Ao 
+clicar pela primeira vez, o texto do botão deve mudar 
+para algo como “Botão bloqueado” e, a partir daí, novos 
+cliques não devem causar mais nenhuma alteração.
+
+6.Crie um componente que representa uma lâmpada com um 
+pequeno painel na tela. Deve haver um botão para ligar/desligar 
+a lâmpada e um botão para aumentar a intensidade da luz. 
+A aparência visual (por exemplo, a cor de fundo) deve mudar 
+quando a lâmpada estiver ligada ou desligada, e a intensidade 
+da luz deve ser exibida em algum texto.
+
+7.Crie um componente que mostra as informações de um produto 
+(nome e preço) e dois botões: “Aplicar desconto” e 
+“Remover desconto”. Ao aplicar o desconto, o preço exibido 
+deve ser reduzido (por exemplo, em 10%) e aparecer em 
+destaque (cor ou estilo diferente). Ao remover o desconto, 
+o preço deve voltar ao valor original e ao estilo normal.
+
+8.Crie um componente que simula um player simples, exibindo 
+o título de uma música, se ela está tocando ou pausada, e um
+ valor de volume. Deve haver um botão “Play/Pause” que alterna
+o estado exibido (tocando ou pausado) e um botão para aumentar
+ o volume. A interface deve mostrar claramente o estado atual 
+ (por texto ou ícone) e o valor do volume.
+
+9.Crie um componente que exibe uma mensagem de aviso e um botão
+ “Alternar modo de aviso”. Em um modo, o aviso deve aparecer 
+ como um parágrafo simples. No outro modo, o mesmo texto deve 
+ aparecer como um título (por exemplo, em um elemento <h2>) 
+ com estilo mais chamativo. O componente deve alternar entre 
+ essas duas formas de exibição ao clicar.
+
+10.Crie um componente que mostre diferentes tipos de alerta na 
+tela (sucesso, erro, aviso), controlados por três botões: “Sucesso”,
+“Erro” e “Aviso”. Ao clicar em cada botão, deve aparecer uma caixa 
+de alerta com o texto correspondente e um estilo visual diferente 
+para cada tipo (por exemplo, fundo verde, vermelho ou amarelo). 
+Inicialmente, não deve haver alerta visível.
