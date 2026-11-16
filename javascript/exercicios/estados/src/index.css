@@ -1,0 +1,38 @@
+.caixa{
+    padding: 15px;/* Espaço interno entre o texto e a borda */
+    border-radius: 6px;/* Arredonda as pontas da caixa */
+    margin-bottom: 16px;/* Separa uma caixa da outra na vertical */
+    
+}
+
+.caixa-claro{
+    background-color: #f9f9f9;/* Cor de fundo clara */
+    color: #333333;/* Cor do texto escura */
+    border: 2px solid #ccc;/* Borda cinza claro */
+}
+
+.caixa-escuro{
+    background-color: #333333;
+    color: #fff;
+    border: 2px solid #111;
+}
+.caixa button{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: none;
+    background: #00a44b;
+    padding: 7px 16px;
+    border: 0;
+    border-radius: 50;
+    box-shadow: none;
+}
+.caixa-escuro button{
+    background-color: #333333;
+    color:#fff;
+
+}
+.caixa-escuro button{
+    background-color: #f9f9f9;
+    color:#333333;
+}

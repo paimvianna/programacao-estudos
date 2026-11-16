@@ -1,0 +1,42 @@
+1.O exercício deve ser implementado utilizando dois componentes principais: Carta e JogoMemoria.
+
+2.Componente Carta:
+
+    Servir como a representação visual de cada carta no jogo e permitir que o usuário interaja com ela.
+    O componente deve ser renderizado como um botão que:
+        Apresenta uma borda vermelha se a carta estiver selecionada.
+        Apresenta um fundo verde se a carta já foi encontrada.
+        Exibe o nome da carta caso tenha sido selecionada ou já tenha sido achada, 
+        caso contrário, mostra um asterisco (*).
+
+3.Componentes de Estado no JogoMemoria:
+
+    Gerenciar a lógica do jogo da memória, controlar o estado das cartas, processar as interações do usuário e exibir o layout completo do jogo.
+    O componente inicializa dois conjuntos de cartas idênticas (A e B) e as embaralha separadamente.
+    Use o estado para gerenciar as seguintes informações:
+        As cartas atualmente selecionadas (uma de cada conjunto).
+        A quantidade de tentativas restantes (começando em 5).
+        Um indicador de erro que sinaliza se o jogador errou a tentativa de combinação.
+
+4.Embaralhamento de Cartas:
+
+    Implemente uma função que embaralha de forma aleatória os elementos de um array. Essa função será usada para misturar as cartas antes de serem exibidas no jogo.
+
+5.Lógica de Validação:
+
+  6.  Implemente uma função de validação que verifica se as cartas selecionadas de A e B possuem o mesmo id.
+        Se forem iguais, marque-as como "achadas" nos respectivos conjuntos.
+        Se forem diferentes, reduza o número de tentativas restantes e exiba uma mensagem de erro.
+    Se todas as cartas forem encontradas, exiba uma mensagem indicando que o jogador venceu o jogo.
+    Se as tentativas se esgotarem antes que todas as combinações sejam encontradas, exiba uma mensagem de derrota.
+
+7.Interação do Usuário:
+
+    Implemente botões de interação para permitir que o usuário vire cartas e, quando necessário, clique em um botão "Tentar Novamente" para limpar as cartas selecionadas e tentar novamente após um erro.
+
+8.Mensagens de Feedback:
+
+    Quando o jogador errar, exiba uma mensagem informando quantas tentativas restam e o botão "Tentar Novamente".
+    Se todas as cartas forem encontradas, mostre uma mensagem de "Você Venceu!".
+    Se as tentativas acabarem e o jogador não encontrar todas as combinações, mostre "Você perdeu."
+

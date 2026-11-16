@@ -1,0 +1,111 @@
+Você deverá implementar um mini-app em React chamado Pesquisa de Satisfação. O objetivo é permitir que o usuário avalie uma lista de itens (p. ex., “Atendimento”, “Tempo de espera”, “Qualidade do serviço”) escolhendo entre três opções visuais (ruim, neutro, bom). Ao finalizar, o app calcula a média das notas e exibe um ícone/resumo final correspondente ao resultado, além de oferecer a opção de iniciar uma nova pesquisa.
+Especificações
+1.Componentes principais
+
+    PesquisaSatisfacao: componente principal que controla o 
+    estado global da pesquisa (lista de itens, valores escolhidos, 
+    finalização e reinício).
+
+    ItemAvaliado: componente responsável por exibir o nome de um item 
+    e permitir que o usuário selecione a avaliação (ruim, neutro ou bom).
+
+Regras da Atividade
+
+    A pesquisa recebe uma lista de itens (strings). 
+    Cada item deve ser exibido com três opções clicáveis:
+
+        Ruim (valor 0)
+
+        Neutro (valor 3)
+
+        Bom (valor 5)
+
+    Todos os itens precisam ser avaliados antes da finalização. 
+    Caso o usuário tente finalizar sem avaliar algum item, 
+    deve aparecer um aviso solicitando o preenchimento completo.
+
+    Após a finalização, deve ser exibida:
+
+        a média das avaliações com duas casas decimais;
+
+        um ícone de resultado (ruim, neutro ou bom) conforme a média:
+
+            Média ≥ 4,0 → ícone bom
+
+            Média ≥ 2,0 e < 4,0 → ícone neutro
+
+            Média < 2,0 → ícone ruim
+
+    Depois de finalizado, as avaliações não devem ser alteradas. Deve existir um botão “Nova Pesquisa” que reinicia o app (limpa as escolhas, remove o resultado e volta à tela de avaliação).
+
+Funcionalidades obrigatórias
+
+    Cada ItemAvaliado deve:
+
+        Exibir o nome do item.
+
+        Permitir a seleção de uma entre três imagens (ruim, neutro, bom).
+
+        Indicar visualmente a opção ativa (ícone “ativado”) e as demais como “desativadas”.
+
+    O componente PesquisaSatisfacao deve:
+        Habilitar o botão “Finalizar” apenas pela lógica interna (pode estar sempre visível, mas ao clicar deve validar se há itens sem avaliação; se houver, alertar o usuário e não finalizar).
+
+        Ao finalizar, calcular a média das avaliações e renderizar:
+
+            Título de agradecimento.
+
+            Média com duas casas decimais.
+
+            Ícone correspondente ao intervalo da média (bom/neutro/ruim).
+
+            Botão “Nova Pesquisa” que restaura o estado inicial (todos os valores null e tela de avaliação).
+
+Configuração do App
+
+    O componente principal recebe uma prop itens (array de strings) com os nomes dos itens a avaliar.
+    Exemplo de uso:
+    <PesquisaSatisfacao itens={["Atendimento", "Tempo de espera", "Qualidade do serviço"]} />
+
+Recursos visuais (ícones)
+
+    Utilize duas versões para cada opção:
+
+        Ativado (selecionado)
+
+        Desativado (não selecionado)
+
+    Ícones:
+
+        ruimAtivado.png, ruimDesativado.png
+
+        neutroAtivado.png, neutroDesativado.png
+
+        bomAtivado.png, bomDesativado.png
+
+Estados e transições
+
+    Estado inicial: lista de itens renderizada; nenhum item selecionado.
+
+    Durante a avaliação: cada clique em um ícone define o item e atualiza visualmente a seleção.
+
+    Finalização:
+
+        Se existir pelo menos um valor não preenchido exibir um alerta “Preencha todos os itens” e permanece na tela de avaliação.
+
+        Caso contrário: exibe tela de resultado com média e ícone correspondente.
+
+    Reinício: o botão “Nova Pesquisa” restaura o estado inicial e retorna à tela de avaliação.
+
+Mensagens e rótulos obrigatórios
+
+    Título da tela de avaliação: “Pesquisa de Satisfação”.
+
+    Mensagem de agradecimento na tela final: “Obrigado por Responder!”.
+
+    Rótulo da média: “Média: X.XX” (duas casas decimais).
+
+    Botões: “Finalizar” e “Nova Pesquisa”.
+
+    Alerta (validação): “Preencha todos os itens”.
+

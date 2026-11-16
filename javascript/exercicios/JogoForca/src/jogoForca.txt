@@ -1,0 +1,26 @@
+Desenvolva um jogo da forca utilizando React, conforme exemplo abaixo. O jogo deve conter três componentes principais: Forca, Teclado e JogoDaForca.
+
+    1.Componente Forca:
+        Este componente deve receber a palavra que o usuário precisa adivinhar 
+        e exibi-la como uma série de botões.
+        Cada letra que ainda não foi descoberta deve aparecer como "-".
+
+    2.Componente Teclado:
+        Deve criar um teclado virtual com as letras do alfabeto para o 
+        usuário selecionar.
+
+    3.Componente JogoDaForca:
+        Recebe como propriedade a palavra a ser adivinhada.
+        Responsável por gerenciar o estado do jogo, incluindo:
+            A palavra a ser adivinhada,
+            O número de tentativas erradas,
+            Se o jogo foi finalizado.
+        Regras de finalização:
+            Caso o jogador cometa mais de três erros, exibir a mensagem 
+            "Você perdeu!" e finalizar o jogo.
+            Caso o jogador acerte todas as letras, exibir a mensagem 
+            "Parabéns! Você ganhou!" e finalizar o jogo.
+        Exibir a quantidade de tentativas erradas realizadas até o momento.
+
+Exemplo de uso do componente:
+<JogoDaForca palavra="REACT" />
